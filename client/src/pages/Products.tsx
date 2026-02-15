@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Search, User, Heart, ShoppingCart, Filter } from "lucide-react";
+import { Search, User, Heart, ShoppingCart, Filter, Sparkles } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useLocation } from "wouter";
 import { useState } from "react";
@@ -169,111 +169,97 @@ export default function Products() {
       </header>
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-primary to-primary/80 text-white py-16">
+      <section className="bg-gradient-to-br from-primary via-primary/95 to-primary/90 text-white py-28">
         <div className="container mx-auto px-4">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4 tracking-tight">Our Product Catalog</h1>
-          <p className="text-xl font-light max-w-2xl">
-            Explore our comprehensive range of laboratory-verified research compounds
-          </p>
+          <div className="max-w-3xl">
+            <div className="flex items-center gap-3 mb-6">
+              <Sparkles className="w-6 h-6" />
+              <span className="text-sm font-semibold tracking-widest">PREMIUM RESEARCH COMPOUNDS</span>
+            </div>
+            <h1 className="text-6xl md:text-7xl font-bold mb-6 tracking-tight leading-tight">Our Product Catalog</h1>
+            <p className="text-xl font-light max-w-2xl leading-relaxed">
+              Explore our comprehensive range of laboratory-verified research compounds, each tested to the highest standards of purity and consistency
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* Filters & Search Section */}
-      <section className="bg-muted/20 py-8 border-b border-border">
+      {/* Filters Section */}
+      <section className="bg-white border-b border-border sticky top-20 z-40 py-6">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row gap-6 items-start md:items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Filter className="w-5 h-5 text-foreground" />
-              <span className="font-semibold text-foreground">Filter by Category:</span>
+            <div className="flex items-center gap-3">
+              <Filter className="w-5 h-5 text-primary font-semibold" />
+              <span className="font-semibold text-foreground text-sm">FILTER BY CATEGORY</span>
             </div>
             <div className="flex flex-wrap gap-3">
-              <button
-                onClick={() => setSelectedCategory("all")}
-                className={`px-6 py-2 rounded-lg font-semibold transition-all duration-200 ${
-                  selectedCategory === "all"
-                    ? "bg-primary text-white shadow-md"
-                    : "bg-white border-2 border-border text-foreground hover:border-primary"
-                }`}
-              >
-                All Products
-              </button>
-              <button
-                onClick={() => setSelectedCategory("peptides")}
-                className={`px-6 py-2 rounded-lg font-semibold transition-all duration-200 ${
-                  selectedCategory === "peptides"
-                    ? "bg-primary text-white shadow-md"
-                    : "bg-white border-2 border-border text-foreground hover:border-primary"
-                }`}
-              >
-                Peptides
-              </button>
-              <button
-                onClick={() => setSelectedCategory("sarms")}
-                className={`px-6 py-2 rounded-lg font-semibold transition-all duration-200 ${
-                  selectedCategory === "sarms"
-                    ? "bg-primary text-white shadow-md"
-                    : "bg-white border-2 border-border text-foreground hover:border-primary"
-                }`}
-              >
-                SARMs
-              </button>
-              <button
-                onClick={() => setSelectedCategory("solutions")}
-                className={`px-6 py-2 rounded-lg font-semibold transition-all duration-200 ${
-                  selectedCategory === "solutions"
-                    ? "bg-primary text-white shadow-md"
-                    : "bg-white border-2 border-border text-foreground hover:border-primary"
-                }`}
-              >
-                Solutions
-              </button>
+              {[
+                { id: "all", label: "All Products" },
+                { id: "peptides", label: "Peptides" },
+                { id: "sarms", label: "SARMs" },
+                { id: "solutions", label: "Solutions" }
+              ].map(cat => (
+                <button
+                  key={cat.id}
+                  onClick={() => setSelectedCategory(cat.id)}
+                  className={`px-6 py-2.5 rounded-lg font-semibold text-sm transition-all duration-300 ${
+                    selectedCategory === cat.id
+                      ? "bg-primary text-white shadow-lg scale-105"
+                      : "bg-muted text-foreground border-2 border-transparent hover:border-primary hover:bg-primary/5"
+                  }`}
+                >
+                  {cat.label}
+                </button>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
       {/* Products Grid */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-gradient-to-b from-white via-white to-muted/10">
         <div className="container mx-auto px-4">
-          <p className="text-center text-muted-foreground mb-12">
-            Showing {filteredProducts.length} product{filteredProducts.length !== 1 ? 's' : ''}
-          </p>
+          <div className="mb-12">
+            <p className="text-center text-muted-foreground font-medium">
+              {filteredProducts.length} product{filteredProducts.length !== 1 ? 's' : ''} available
+            </p>
+          </div>
 
           <div className="grid md:grid-cols-4 gap-8">
             {filteredProducts.map((product) => (
               <Card
                 key={product.id}
-                className="border border-border overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-white group"
+                className="border border-border/50 overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 bg-white group"
               >
-                <div className="relative h-64 bg-muted overflow-hidden">
+                <div className="relative h-72 bg-muted overflow-hidden">
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   {product.featured && (
-                    <div className="absolute top-4 left-4 bg-primary text-white px-4 py-2 text-xs font-bold rounded-lg shadow-md">
-                      Featured
+                    <div className="absolute top-4 left-4 bg-primary text-white px-4 py-2 text-xs font-bold rounded-lg shadow-lg backdrop-blur-sm">
+                      ⭐ Featured
                     </div>
                   )}
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
 
                 <div className="p-6">
-                  <h3 className="font-bold text-foreground mb-2 line-clamp-2 text-sm">{product.name}</h3>
-                  <p className="text-xs text-muted-foreground mb-4 line-clamp-2">{product.description}</p>
+                  <h3 className="font-bold text-foreground mb-2 line-clamp-2 text-sm leading-tight">{product.name}</h3>
+                  <p className="text-xs text-muted-foreground mb-6 line-clamp-2 leading-relaxed">{product.description}</p>
 
-                  <div className="flex items-center gap-2 mb-6">
-                    <span className="text-2xl font-bold text-foreground">{product.price}</span>
+                  <div className="flex items-center gap-3 mb-6">
+                    <span className="text-2xl font-bold text-primary">{product.price}</span>
                     {product.originalPrice && product.originalPrice !== product.price && (
-                      <span className="text-xs text-muted-foreground line-through">
+                      <span className="text-xs text-muted-foreground line-through font-medium">
                         {product.originalPrice}
                       </span>
                     )}
                   </div>
 
                   <Button
-                    className="w-full bg-primary text-white hover:bg-primary/90 font-bold rounded-lg transition-all duration-200 hover:shadow-lg"
+                    className="w-full bg-primary text-white hover:bg-primary/90 font-bold rounded-lg transition-all duration-300 hover:shadow-lg hover:scale-105 py-2.5"
                     onClick={() => handleAddToCart(product)}
                   >
                     ADD TO CART
@@ -284,20 +270,50 @@ export default function Products() {
           </div>
 
           {filteredProducts.length === 0 && (
-            <div className="text-center py-20">
-              <p className="text-xl text-muted-foreground mb-6">No products found matching your criteria</p>
+            <div className="text-center py-32">
+              <div className="mb-6">
+                <Search className="w-16 h-16 text-muted-foreground/30 mx-auto" />
+              </div>
+              <p className="text-2xl font-bold text-foreground mb-4">No products found</p>
+              <p className="text-lg text-muted-foreground mb-8">Try adjusting your filters or search terms</p>
               <Button
                 onClick={() => {
                   setSelectedCategory("all");
                   setSearchTerm("");
                 }}
-                variant="outline"
-                className="border-2 border-foreground text-foreground hover:bg-foreground hover:text-white"
+                className="bg-primary text-white hover:bg-primary/90 font-bold px-8 py-3 rounded-lg"
               >
                 Clear Filters
               </Button>
             </div>
           )}
+        </div>
+      </section>
+
+      {/* Info Section */}
+      <section className="py-20 bg-muted/30">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-3 gap-12">
+            {[
+              {
+                title: "Laboratory Verified",
+                description: "Every batch undergoes rigorous third-party testing to ensure maximum purity and consistency"
+              },
+              {
+                title: "Secure Checkout",
+                description: "Enterprise-grade encryption protects your information with complete confidentiality"
+              },
+              {
+                title: "Fast Shipping",
+                description: "Orders processed within 24 hours with expedited delivery to researchers worldwide"
+              }
+            ].map((info, idx) => (
+              <div key={idx} className="text-center">
+                <h3 className="text-xl font-bold text-foreground mb-4">{info.title}</h3>
+                <p className="text-foreground/70 leading-relaxed">{info.description}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
