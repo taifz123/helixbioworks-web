@@ -43,40 +43,40 @@
 }
 
 :root {
-  /* Helix BioWorks Color Palette */
-  --primary: #1a3a52;
-  --primary-foreground: #f8f9fa;
-  --sidebar-primary: #1a3a52;
-  --sidebar-primary-foreground: #f8f9fa;
-  --chart-1: #00b4d8;
-  --chart-2: #0096c7;
-  --chart-3: #1a3a52;
-  --chart-4: #7cb342;
-  --chart-5: #2c3e50;
+  /* DXB Supps Style Color Palette */
+  --primary: #00FF00;
+  --primary-foreground: #000000;
+  --sidebar-primary: #00FF00;
+  --sidebar-primary-foreground: #000000;
+  --chart-1: #00FF00;
+  --chart-2: #00FF00;
+  --chart-3: #00FF00;
+  --chart-4: #00FF00;
+  --chart-5: #00FF00;
   --radius: 0.65rem;
-  --background: oklch(0.98 0.001 286.375);
-  --foreground: #2c3e50;
-  --card: oklch(1 0 0);
-  --card-foreground: #2c3e50;
-  --popover: oklch(1 0 0);
-  --popover-foreground: #2c3e50;
-  --secondary: #7cb342;
-  --secondary-foreground: oklch(1 0 0);
-  --muted: #e8eaed;
-  --muted-foreground: #7a8a99;
-  --accent: #00b4d8;
-  --accent-foreground: oklch(1 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: #e8eaed;
-  --input: #f8f9fa;
-  --ring: #00b4d8;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: #2c3e50;
-  --sidebar-accent: #00b4d8;
-  --sidebar-accent-foreground: oklch(1 0 0);
-  --sidebar-border: #e8eaed;
-  --sidebar-ring: #00b4d8;
+  --background: #FFFFFF;
+  --foreground: #1a1a1a;
+  --card: #FFFFFF;
+  --card-foreground: #1a1a1a;
+  --popover: #FFFFFF;
+  --popover-foreground: #1a1a1a;
+  --secondary: #000000;
+  --secondary-foreground: #FFFFFF;
+  --muted: #f5f5f5;
+  --muted-foreground: #666666;
+  --accent: #00FF00;
+  --accent-foreground: #000000;
+  --destructive: #FF0000;
+  --destructive-foreground: #FFFFFF;
+  --border: #e0e0e0;
+  --input: #f5f5f5;
+  --ring: #00FF00;
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #1a1a1a;
+  --sidebar-accent: #00FF00;
+  --sidebar-accent-foreground: #000000;
+  --sidebar-border: #e0e0e0;
+  --sidebar-ring: #00FF00;
 }
 
 .dark {
