@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ChevronRight, Shield, Beaker, Award, ShoppingCart, Search, User, Heart } from "lucide-react";
-import { useState } from "react";
+import { useCart } from "@/contexts/CartContext";
+import { useLocation } from "wouter";
 
 /**
  * Helix BioWorks - Modern Biotech Minimalism
@@ -11,8 +12,9 @@ import { useState } from "react";
  */
 
 export default function Home() {
-  const [cartCount, setCartCount] = useState(0);
-  const [wishlistCount, setWishlistCount] = useState(0);
+  const { addItem, getTotalItems } = useCart();
+  const [, setLocation] = useLocation();
+  const cartCount = getTotalItems();
 
   const products = [
     {
@@ -71,6 +73,16 @@ export default function Home() {
     },
   ];
 
+  const handleAddToCart = (product: typeof products[0]) => {
+    addItem({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      purity: product.purity,
+    });
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
@@ -108,18 +120,13 @@ export default function Home() {
               <User className="w-5 h-5 text-foreground" />
             </button>
             <button
-              onClick={() => setWishlistCount(w => w + 1)}
+              onClick={() => setLocation("/cart")}
               className="p-2 hover:bg-muted rounded-full transition relative"
             >
               <Heart className="w-5 h-5 text-foreground" />
-              {wishlistCount > 0 && (
-                <span className="absolute top-1 right-1 w-4 h-4 bg-accent text-white text-xs rounded-full flex items-center justify-center">
-                  {wishlistCount}
-                </span>
-              )}
             </button>
             <button
-              onClick={() => setCartCount(c => c + 1)}
+              onClick={() => setLocation("/cart")}
               className="p-2 hover:bg-muted rounded-full transition relative"
             >
               <ShoppingCart className="w-5 h-5 text-foreground" />
@@ -161,7 +168,7 @@ export default function Home() {
                 <Button
                   size="lg"
                   className="bg-accent hover:bg-accent/90 text-white font-semibold"
-                  onClick={() => setCartCount(c => c + 1)}
+                  onClick={() => setLocation("/cart")}
                 >
                   Shop Now
                   <ChevronRight className="w-4 h-4 ml-2" />
@@ -255,7 +262,7 @@ export default function Home() {
                   </div>
                   <Button
                     className="w-full bg-accent hover:bg-accent/90 text-white font-semibold"
-                    onClick={() => setCartCount(c => c + 1)}
+                    onClick={() => handleAddToCart(product)}
                   >
                     Add to Cart
                   </Button>
@@ -329,7 +336,7 @@ export default function Home() {
             <Button
               size="lg"
               className="bg-accent hover:bg-accent/90 text-white font-semibold"
-              onClick={() => setCartCount(c => c + 1)}
+              onClick={() => setLocation("/cart")}
             >
               Shop Now
             </Button>
