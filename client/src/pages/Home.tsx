@@ -38,8 +38,8 @@ export default function Home() {
     {
       id: 1,
       name: "Bacteriostatic Water",
-      price: "$29.95",
-      originalPrice: "$34.95",
+      price: "$29.95 AUD",
+      originalPrice: "$34.95 AUD",
       image: "https://via.placeholder.com/200x250?text=Bacteriostatic+Water",
       rating: 4.7,
       reviews: 37,
@@ -48,8 +48,8 @@ export default function Home() {
     {
       id: 2,
       name: "Premium BPC-157 5mg",
-      price: "$84.95",
-      originalPrice: "$94.95",
+      price: "$84.95 AUD",
+      originalPrice: "$94.95 AUD",
       image: "https://via.placeholder.com/200x250?text=BPC-157",
       rating: 4.8,
       reviews: 69,
@@ -58,8 +58,8 @@ export default function Home() {
     {
       id: 3,
       name: "TB-500",
-      price: "$109.95",
-      originalPrice: "$119.95",
+      price: "$109.95 AUD",
+      originalPrice: "$119.95 AUD",
       image: "https://via.placeholder.com/200x250?text=TB-500",
       rating: 4.6,
       reviews: 36,
@@ -68,8 +68,8 @@ export default function Home() {
     {
       id: 4,
       name: "MK677 | Helix Supps",
-      price: "$129.95",
-      originalPrice: "$139.95",
+      price: "$129.95 AUD",
+      originalPrice: "$139.95 AUD",
       image: "https://via.placeholder.com/200x250?text=MK677",
       rating: 4.7,
       reviews: 53,

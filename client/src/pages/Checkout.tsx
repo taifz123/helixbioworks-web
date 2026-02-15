@@ -1,9 +1,9 @@
-import { Button } from "@/components/ui/button";
 import { useCart } from "@/contexts/CartContext";
-import { ChevronLeft, CheckCircle } from "lucide-react";
+import { ChevronLeft, CheckCircle, Mail } from "lucide-react";
 import { useLocation } from "wouter";
 import { useState } from "react";
 import { sendOrderConfirmationEmail } from "@/lib/emailService";
+import { Button } from "@/components/ui/button";
 
 export default function CheckoutPage() {
   const { items, getTotalPrice, clearCart } = useCart();
@@ -18,13 +18,10 @@ export default function CheckoutPage() {
     city: "",
     state: "",
     zip: "",
-    cardName: "",
-    cardNumber: "",
-    expiry: "",
-    cvv: "",
+    country: "Australia",
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
@@ -33,7 +30,7 @@ export default function CheckoutPage() {
     e.preventDefault();
     
     // Validate form
-    if (!formData.firstName || !formData.email || !formData.address || !formData.cardNumber) {
+    if (!formData.firstName || !formData.email || !formData.address || !formData.city) {
       alert("Please fill in all required fields");
       return;
     }
@@ -41,7 +38,7 @@ export default function CheckoutPage() {
     try {
       // Generate order ID
       const orderId = `ORD-${Date.now()}`;
-      const orderDate = new Date().toLocaleDateString('en-US', {
+      const orderDate = new Date().toLocaleDateString('en-AU', {
         year: 'numeric',
         month: 'long',
         day: 'numeric',
@@ -50,7 +47,7 @@ export default function CheckoutPage() {
       });
 
       const totalPrice = getTotalPrice();
-      const tax = totalPrice * 0.08;
+      const tax = totalPrice * 0.10;
       const total = totalPrice + tax;
 
       // Send order confirmation email
@@ -68,12 +65,13 @@ export default function CheckoutPage() {
         tax,
         shipping: 0,
         total,
-        paymentMethod: "Credit Card",
+        paymentMethod: "Email Invoice",
         shippingAddress: {
           address: formData.address,
           city: formData.city,
           state: formData.state,
           zip: formData.zip,
+          country: formData.country,
         },
       });
 
@@ -83,10 +81,10 @@ export default function CheckoutPage() {
       setOrderPlaced(true);
       clearCart();
       
-      // Redirect to confirmation after 3 seconds
+      // Redirect to home after 5 seconds
       setTimeout(() => {
         setLocation("/");
-      }, 3000);
+      }, 5000);
     } catch (error) {
       console.error("Order processing error:", error);
       alert("Error processing order. Please try again.");
@@ -96,30 +94,29 @@ export default function CheckoutPage() {
   if (items.length === 0 && !orderPlaced) {
     return (
       <div className="min-h-screen bg-white">
-        <nav className="sticky top-0 z-50 bg-white border-b border-border">
-          <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">HB</span>
-              </div>
-              <span className="font-bold text-lg text-primary">Helix BioWorks</span>
-            </div>
+        <header className="sticky top-0 z-50 bg-white border-b border-border shadow-sm">
+          <div className="container mx-auto px-4 py-4">
+            <button
+              onClick={() => setLocation("/")}
+              className="flex items-center gap-2 font-bold text-xl tracking-tight hover:opacity-80 transition-opacity duration-200"
+            >
+              <span className="text-primary">HELIX</span>
+              <span className="text-foreground">BIOWORKS</span>
+            </button>
           </div>
-        </nav>
+        </header>
 
-        <div className="container mx-auto px-4 py-20 text-center">
-          <h1 className="text-4xl font-bold text-primary mb-4">No Items to Checkout</h1>
-          <p className="text-lg text-foreground/70 mb-8">
-            Your cart is empty. Add products before proceeding to checkout.
-          </p>
-          <Button
-            size="lg"
-            className="bg-accent hover:bg-accent/90 text-white font-semibold"
-            onClick={() => setLocation("/")}
-          >
-            <ChevronLeft className="w-4 h-4 mr-2" />
-            Back to Shop
-          </Button>
+        <div className="container mx-auto px-4 py-16">
+          <div className="max-w-2xl mx-auto text-center">
+            <h1 className="text-4xl font-bold mb-6 text-foreground">Your Cart is Empty</h1>
+            <p className="text-muted-foreground mb-8">Add some premium peptides to get started.</p>
+            <Button
+              onClick={() => setLocation("/")}
+              className="bg-primary text-secondary hover:bg-green-600 font-bold"
+            >
+              Continue Shopping
+            </Button>
+          </div>
         </div>
       </div>
     );
@@ -127,287 +124,240 @@ export default function CheckoutPage() {
 
   if (orderPlaced) {
     return (
-      <div className="min-h-screen bg-white">
-        <nav className="sticky top-0 z-50 bg-white border-b border-border">
-          <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">HB</span>
-              </div>
-              <span className="font-bold text-lg text-primary">Helix BioWorks</span>
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center max-w-2xl mx-auto px-4">
+          <div className="mb-8 flex justify-center">
+            <div className="p-6 bg-green-100 rounded-full">
+              <CheckCircle className="w-16 h-16 text-green-600" />
             </div>
           </div>
-        </nav>
-
-        <div className="container mx-auto px-4 py-20 text-center">
-          <CheckCircle className="w-20 h-20 text-secondary mx-auto mb-6" />
-          <h1 className="text-4xl font-bold text-primary mb-4">Order Confirmed!</h1>
-          <p className="text-lg text-foreground/70 mb-2">
-            Thank you for your order, {formData.firstName}!
+          <h1 className="text-4xl font-bold mb-4 text-foreground">Order Confirmed!</h1>
+          <p className="text-lg text-muted-foreground mb-6">
+            Thank you for your order. You will receive an email with payment instructions within 5 minutes.
           </p>
-          <p className="text-foreground/70 mb-8">
-            A confirmation email has been sent to {formData.email}
-          </p>
-          <div className="bg-muted/50 p-6 rounded-lg mb-8 inline-block">
-            <p className="text-sm text-foreground/70 mb-2">Order Total</p>
-            <p className="text-3xl font-bold text-accent">
-              ${getTotalPrice().toFixed(2)}
-            </p>
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
+            <div className="flex items-start gap-4">
+              <Mail className="w-6 h-6 text-blue-600 flex-shrink-0 mt-1" />
+              <div className="text-left">
+                <h3 className="font-bold text-blue-900 mb-2">Check Your Email</h3>
+                <p className="text-blue-800 text-sm">
+                  We've sent payment instructions to your email address. Please check your inbox and spam folder if you don't see it within 5 minutes.
+                </p>
+              </div>
+            </div>
           </div>
-          <p className="text-foreground/70 mb-8">
-            Redirecting to home page in 3 seconds...
-          </p>
           <Button
-            size="lg"
-            className="bg-accent hover:bg-accent/90 text-white font-semibold"
             onClick={() => setLocation("/")}
+            className="bg-primary text-secondary hover:bg-green-600 font-bold"
           >
             Return to Home
           </Button>
+          <p className="text-sm text-muted-foreground mt-6">
+            Redirecting in 5 seconds...
+          </p>
         </div>
       </div>
     );
   }
 
   const totalPrice = getTotalPrice();
+  const tax = totalPrice * 0.10;
+  const total = totalPrice + tax;
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Navigation */}
-      <nav className="sticky top-0 z-50 bg-white border-b border-border">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">HB</span>
-            </div>
-            <span className="font-bold text-lg text-primary">Helix BioWorks</span>
-          </div>
+      {/* Header */}
+      <header className="sticky top-0 z-50 bg-white border-b border-border shadow-sm">
+        <div className="container mx-auto px-4 py-4">
           <button
-            onClick={() => setLocation("/cart")}
-            className="text-sm font-medium text-foreground hover:text-primary transition"
+            onClick={() => setLocation("/")}
+            className="flex items-center gap-2 font-bold text-xl tracking-tight hover:opacity-80 transition-opacity duration-200"
           >
-            <ChevronLeft className="w-4 h-4 inline mr-2" />
-            Back to Cart
+            <span className="text-primary">HELIX</span>
+            <span className="text-foreground">BIOWORKS</span>
           </button>
         </div>
-      </nav>
+      </header>
 
       {/* Checkout Content */}
       <div className="container mx-auto px-4 py-12">
-        <h1 className="text-4xl font-bold text-primary mb-8">Checkout</h1>
+        <div className="max-w-6xl mx-auto">
+          <button
+            onClick={() => setLocation("/cart")}
+            className="flex items-center gap-2 text-primary hover:text-green-600 transition-colors mb-8"
+          >
+            <ChevronLeft className="w-5 h-5" />
+            Back to Cart
+          </button>
 
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Checkout Form */}
-          <div className="lg:col-span-2">
-            <form onSubmit={handleSubmitOrder} className="space-y-8">
-              {/* Shipping Information */}
-              <div className="border border-border rounded-lg p-6">
-                <h2 className="text-2xl font-bold text-primary mb-6">
-                  Shipping Information
-                </h2>
+          <div className="grid md:grid-cols-3 gap-12">
+            {/* Shipping Form */}
+            <div className="md:col-span-2">
+              <h1 className="text-4xl font-bold mb-8 text-foreground">Shipping Information</h1>
 
-                <div className="grid md:grid-cols-2 gap-4 mb-4">
-                  <input
-                    type="text"
-                    name="firstName"
-                    placeholder="First Name *"
-                    value={formData.firstName}
-                    onChange={handleInputChange}
-                    className="px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
-                    required
-                  />
-                  <input
-                    type="text"
-                    name="lastName"
-                    placeholder="Last Name"
-                    value={formData.lastName}
-                    onChange={handleInputChange}
-                    className="px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
-                  />
+              <form onSubmit={handleSubmitOrder} className="space-y-6">
+                {/* Personal Information */}
+                <div>
+                  <h2 className="text-xl font-bold mb-4 text-foreground">Contact Information</h2>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <input
+                      type="text"
+                      name="firstName"
+                      placeholder="First Name *"
+                      value={formData.firstName}
+                      onChange={handleInputChange}
+                      className="px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                      required
+                    />
+                    <input
+                      type="text"
+                      name="lastName"
+                      placeholder="Last Name"
+                      value={formData.lastName}
+                      onChange={handleInputChange}
+                      className="px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                    />
+                    <input
+                      type="email"
+                      name="email"
+                      placeholder="Email Address *"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className="px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary md:col-span-2"
+                      required
+                    />
+                    <input
+                      type="tel"
+                      name="phone"
+                      placeholder="Phone Number"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      className="px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary md:col-span-2"
+                    />
+                  </div>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-4 mb-4">
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Email Address *"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className="px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
-                    required
-                  />
-                  <input
-                    type="tel"
-                    name="phone"
-                    placeholder="Phone Number"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    className="px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
-                  />
+                {/* Shipping Address */}
+                <div>
+                  <h2 className="text-xl font-bold mb-4 text-foreground">Shipping Address</h2>
+                  <div className="space-y-4">
+                    <input
+                      type="text"
+                      name="address"
+                      placeholder="Street Address *"
+                      value={formData.address}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                      required
+                    />
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <input
+                        type="text"
+                        name="city"
+                        placeholder="City *"
+                        value={formData.city}
+                        onChange={handleInputChange}
+                        className="px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                        required
+                      />
+                      <input
+                        type="text"
+                        name="state"
+                        placeholder="State/Province"
+                        value={formData.state}
+                        onChange={handleInputChange}
+                        className="px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                      />
+                    </div>
+                    <input
+                      type="text"
+                      name="zip"
+                      placeholder="Postal Code"
+                      value={formData.zip}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                    />
+                    <select
+                      name="country"
+                      value={formData.country}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                    >
+                      <option value="Australia">Australia</option>
+                      <option value="New Zealand">New Zealand</option>
+                      <option value="United States">United States</option>
+                      <option value="Canada">Canada</option>
+                      <option value="United Kingdom">United Kingdom</option>
+                      <option value="Other">Other</option>
+                    </select>
+                  </div>
                 </div>
 
-                <input
-                  type="text"
-                  name="address"
-                  placeholder="Street Address *"
-                  value={formData.address}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent mb-4"
-                  required
-                />
-
-                <div className="grid md:grid-cols-3 gap-4">
-                  <input
-                    type="text"
-                    name="city"
-                    placeholder="City"
-                    value={formData.city}
-                    onChange={handleInputChange}
-                    className="px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
-                  />
-                  <input
-                    type="text"
-                    name="state"
-                    placeholder="State/Province"
-                    value={formData.state}
-                    onChange={handleInputChange}
-                    className="px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
-                  />
-                  <input
-                    type="text"
-                    name="zip"
-                    placeholder="ZIP/Postal Code"
-                    value={formData.zip}
-                    onChange={handleInputChange}
-                    className="px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
-                  />
-                </div>
-              </div>
-
-              {/* Payment Information */}
-              <div className="border border-border rounded-lg p-6">
-                <h2 className="text-2xl font-bold text-primary mb-6">
-                  Payment Information
-                </h2>
-
-                <input
-                  type="text"
-                  name="cardName"
-                  placeholder="Cardholder Name *"
-                  value={formData.cardName}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent mb-4"
-                  required
-                />
-
-                <input
-                  type="text"
-                  name="cardNumber"
-                  placeholder="Card Number (4111 1111 1111 1111) *"
-                  value={formData.cardNumber}
-                  onChange={handleInputChange}
-                  maxLength={19}
-                  className="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent mb-4"
-                  required
-                />
-
-                <div className="grid grid-cols-2 gap-4">
-                  <input
-                    type="text"
-                    name="expiry"
-                    placeholder="MM/YY"
-                    value={formData.expiry}
-                    onChange={handleInputChange}
-                    maxLength={5}
-                    className="px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
-                  />
-                  <input
-                    type="text"
-                    name="cvv"
-                    placeholder="CVV"
-                    value={formData.cvv}
-                    onChange={handleInputChange}
-                    maxLength={4}
-                    className="px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
-                  />
+                {/* Payment Instructions */}
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                  <h3 className="font-bold text-blue-900 mb-3">Payment Instructions</h3>
+                  <p className="text-blue-800 text-sm mb-3">
+                    After submitting this form, you will receive an email within 5 minutes with payment instructions and available payment methods.
+                  </p>
+                  <p className="text-blue-800 text-sm">
+                    Please check your email (including spam folder) for the payment details.
+                  </p>
                 </div>
 
-                <p className="text-xs text-foreground/70 mt-4">
-                  For testing: Use card number 4111 1111 1111 1111 with any future date and any CVV
-                </p>
-              </div>
+                {/* Submit Button */}
+                <Button
+                  type="submit"
+                  className="w-full bg-secondary text-white hover:bg-black font-bold py-4 text-lg rounded-lg transition-all duration-200"
+                >
+                  Complete Order & Receive Payment Instructions
+                </Button>
+              </form>
+            </div>
 
-              {/* Order Items Summary */}
-              <div className="border border-border rounded-lg p-6">
-                <h2 className="text-xl font-bold text-primary mb-4">Order Items</h2>
-                <div className="space-y-3">
-                  {items.map(item => {
-                    const price = parseFloat(item.price.replace('$', ''));
-                    return (
-                      <div key={item.id} className="flex justify-between text-foreground/70">
-                        <span>{item.name} x {item.quantity}</span>
-                        <span>${(price * item.quantity).toFixed(2)}</span>
+            {/* Order Summary */}
+            <div className="md:col-span-1">
+              <div className="bg-muted/30 rounded-lg p-8 border border-border sticky top-24">
+                <h2 className="text-2xl font-bold mb-8 text-foreground">Order Summary</h2>
+
+                {/* Items */}
+                <div className="space-y-4 mb-8 pb-8 border-b border-border">
+                  {items.map((item) => (
+                    <div key={item.id} className="flex justify-between">
+                      <div>
+                        <p className="font-semibold text-foreground">{item.name}</p>
+                        <p className="text-sm text-muted-foreground">Qty: {item.quantity}</p>
                       </div>
-                    );
-                  })}
+                      <p className="font-semibold text-foreground">${(parseFloat(item.price.replace('$', '')) * item.quantity).toFixed(2)} AUD</p>
+                    </div>
+                  ))}
                 </div>
-              </div>
-            </form>
-          </div>
 
-          {/* Order Summary Sidebar */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-24 p-6 border border-border rounded-lg bg-muted/30 space-y-6">
-              <h2 className="text-2xl font-bold text-primary">Order Summary</h2>
-
-              <div className="space-y-3 border-t border-b border-border py-4">
-                <div className="flex justify-between text-foreground/70">
-                  <span>Subtotal</span>
-                  <span>${totalPrice.toFixed(2)}</span>
+                {/* Totals */}
+                <div className="space-y-3 mb-8">
+                  <div className="flex justify-between text-foreground">
+                    <span>Subtotal:</span>
+                    <span>${totalPrice.toFixed(2)} AUD</span>
+                  </div>
+                  <div className="flex justify-between text-foreground">
+                    <span>Tax (10%):</span>
+                    <span>${tax.toFixed(2)} AUD</span>
+                  </div>
+                  <div className="flex justify-between text-foreground">
+                    <span>Shipping:</span>
+                    <span>FREE</span>
+                  </div>
+                  <div className="border-t border-border pt-3 flex justify-between text-xl font-bold text-foreground">
+                    <span>Total:</span>
+                    <span>${total.toFixed(2)} AUD</span>
+                  </div>
                 </div>
-                <div className="flex justify-between text-foreground/70">
-                  <span>Shipping</span>
-                  <span className="font-semibold text-secondary">FREE</span>
+
+                {/* Info */}
+                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                  <p className="text-xs text-yellow-800">
+                    <span className="font-bold">Note:</span> Payment will be collected via email invoice. No payment information is collected on this form.
+                  </p>
                 </div>
-                <div className="flex justify-between text-foreground/70">
-                  <span>Tax</span>
-                  <span>${((totalPrice as number) * 0.08).toFixed(2)}</span>
-                </div>
-              </div>
-
-              <div className="flex justify-between items-center">
-                <span className="text-lg font-semibold text-primary">Total</span>
-                <span className="text-3xl font-bold text-accent">
-                  ${(totalPrice * 1.08).toFixed(2)}
-                </span>
-              </div>
-
-              <Button
-                size="lg"
-                className="w-full bg-accent hover:bg-accent/90 text-white font-semibold"
-                onClick={handleSubmitOrder}
-                type="submit"
-              >
-                Complete Order & Send Email
-              </Button>
-
-              <Button
-                size="lg"
-                variant="outline"
-                className="w-full"
-                onClick={() => setLocation("/cart")}
-              >
-                Back to Cart
-              </Button>
-
-              <div className="bg-secondary/10 p-4 rounded-lg">
-                <p className="text-xs text-foreground/70">
-                  ✓ Secure checkout
-                  <br />
-                  ✓ Lab-certified products
-                  <br />
-                  ✓ 30-day satisfaction guarantee
-                </p>
               </div>
             </div>
           </div>
