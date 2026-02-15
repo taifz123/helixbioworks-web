@@ -6,10 +6,10 @@ import { useLocation } from "wouter";
 import { useState, useEffect } from "react";
 
 /**
- * Helix BioWorks - DXB Supps Style Design
+ * Helix BioWorks - Premium DXB Supps Style Design
  * Bright green accent (#00FF00), black and white contrast
  * Dark hero section with molecular visualization
- * Professional product grid with green dashed borders
+ * Professional product grid with enhanced styling
  */
 
 export default function Home() {
@@ -121,62 +121,57 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white border-b border-border">
+      <header className="sticky top-0 z-50 bg-white border-b border-border shadow-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between gap-8">
             {/* Logo */}
-            <div className="flex items-center gap-2 font-bold text-lg">
-              <span className="text-primary">HELIX BIOWORKS</span>
+            <div className="flex items-center gap-2 font-bold text-xl tracking-tight">
+              <span className="text-primary">HELIX</span>
+              <span className="text-foreground">BIOWORKS</span>
             </div>
 
             {/* Navigation */}
-            <nav className="hidden md:flex items-center gap-8 text-sm font-semibold">
-              <a href="#" className="text-foreground hover:text-primary transition">
-                SARMS AND PEPTIDES | BEST PEPTIDES ONLINE
+            <nav className="hidden md:flex items-center gap-12 text-sm font-semibold">
+              <a href="#" className="text-foreground hover:text-primary transition-colors duration-200">
+                SHOP
               </a>
-              <a href="#" className="text-foreground hover:text-primary transition">
-                PEPTIDES FOR SALE | HIGH PURITY
-              </a>
-              <a href="#" className="text-foreground hover:text-primary transition">
+              <a href="#" className="text-foreground hover:text-primary transition-colors duration-200">
                 ABOUT US
               </a>
-              <a href="#" className="text-foreground hover:text-primary transition">
+              <a href="#" className="text-foreground hover:text-primary transition-colors duration-200">
                 FAQS
               </a>
-              <a href="#" className="text-foreground hover:text-primary transition">
-                AFFILIATE PROGRAM
-              </a>
-              <a href="#" className="text-foreground hover:text-primary transition">
+              <a href="#" className="text-foreground hover:text-primary transition-colors duration-200">
                 CONTACT
               </a>
             </nav>
 
             {/* Right Icons */}
             <div className="flex items-center gap-4">
-              <div className="hidden sm:flex items-center bg-muted rounded px-3 py-2 gap-2">
+              <div className="hidden sm:flex items-center bg-muted rounded-lg px-4 py-2 gap-2 border border-border">
                 <Search className="w-4 h-4 text-muted-foreground" />
                 <input
                   type="text"
-                  placeholder="Search for products..."
+                  placeholder="Search products..."
                   className="bg-transparent outline-none text-sm w-40 placeholder-muted-foreground"
                 />
               </div>
-              <button className="p-2 hover:bg-muted rounded transition">
+              <button className="p-2 hover:bg-muted rounded-lg transition-colors duration-200">
                 <User className="w-5 h-5" />
               </button>
-              <button className="p-2 hover:bg-muted rounded transition relative">
+              <button className="p-2 hover:bg-muted rounded-lg transition-colors duration-200 relative">
                 <Heart className="w-5 h-5" />
-                <span className="absolute top-1 right-1 w-4 h-4 bg-primary text-secondary text-xs rounded-full flex items-center justify-center font-bold">
+                <span className="absolute top-0 right-0 w-5 h-5 bg-primary text-secondary text-xs rounded-full flex items-center justify-center font-bold text-xs">
                   5
                 </span>
               </button>
               <button
                 onClick={() => setLocation("/cart")}
-                className="p-2 hover:bg-muted rounded transition relative"
+                className="p-2 hover:bg-muted rounded-lg transition-colors duration-200 relative"
               >
                 <ShoppingCart className="w-5 h-5" />
                 {cartCount > 0 && (
-                  <span className="absolute top-1 right-1 w-4 h-4 bg-primary text-secondary text-xs rounded-full flex items-center justify-center font-bold">
+                  <span className="absolute top-0 right-0 w-5 h-5 bg-primary text-secondary text-xs rounded-full flex items-center justify-center font-bold">
                     {cartCount}
                   </span>
                 )}
@@ -187,36 +182,36 @@ export default function Home() {
       </header>
 
       {/* Hero Carousel */}
-      <section className="relative bg-secondary h-96 md:h-[500px] overflow-hidden">
+      <section className="relative bg-secondary h-96 md:h-[550px] overflow-hidden">
         <div className="absolute inset-0 flex items-center justify-center">
           {/* Molecular visualization background */}
-          <div className="absolute inset-0 opacity-20">
+          <div className="absolute inset-0 opacity-15">
             <svg viewBox="0 0 400 400" className="w-full h-full">
-              <circle cx="150" cy="100" r="40" fill="#999" />
-              <circle cx="250" cy="150" r="40" fill="#999" />
-              <circle cx="200" cy="250" r="40" fill="#999" />
-              <circle cx="100" cy="300" r="40" fill="#999" />
-              <line x1="150" y1="100" x2="250" y2="150" stroke="#999" strokeWidth="3" />
-              <line x1="250" y1="150" x2="200" y2="250" stroke="#999" strokeWidth="3" />
-              <line x1="200" y1="250" x2="100" y2="300" stroke="#999" strokeWidth="3" />
+              <circle cx="150" cy="100" r="40" fill="#fff" />
+              <circle cx="250" cy="150" r="40" fill="#fff" />
+              <circle cx="200" cy="250" r="40" fill="#fff" />
+              <circle cx="100" cy="300" r="40" fill="#fff" />
+              <line x1="150" y1="100" x2="250" y2="150" stroke="#fff" strokeWidth="3" />
+              <line x1="250" y1="150" x2="200" y2="250" stroke="#fff" strokeWidth="3" />
+              <line x1="200" y1="250" x2="100" y2="300" stroke="#fff" strokeWidth="3" />
             </svg>
           </div>
 
           {/* Left Arrow */}
           <button
             onClick={() => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)}
-            className="absolute left-8 z-20 p-3 hover:bg-white/20 rounded-full transition"
+            className="absolute left-8 z-20 p-3 hover:bg-white/20 rounded-full transition-all duration-200 group"
           >
-            <ChevronLeft className="w-8 h-8 text-white" />
+            <ChevronLeft className="w-8 h-8 text-white group-hover:scale-110 transition-transform" />
           </button>
 
           {/* Center Content */}
-          <div className="relative z-10 text-center text-white">
-            <h1 className="text-6xl md:text-7xl font-bold mb-4">{slides[currentSlide].title}</h1>
-            <p className="text-2xl mb-8">{slides[currentSlide].subtitle}</p>
+          <div className="relative z-10 text-center text-white px-4">
+            <h1 className="text-5xl md:text-7xl font-bold mb-4 tracking-tight">{slides[currentSlide].title}</h1>
+            <p className="text-xl md:text-2xl mb-10 font-light tracking-wide">{slides[currentSlide].subtitle}</p>
             <Button
               size="lg"
-              className="bg-white text-secondary hover:bg-gray-100 font-bold px-8"
+              className="bg-white text-secondary hover:bg-gray-100 font-bold px-10 py-6 text-base rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
               onClick={() => setLocation("/cart")}
             >
               SHOP NOW
@@ -226,61 +221,69 @@ export default function Home() {
           {/* Right Arrow */}
           <button
             onClick={() => setCurrentSlide((prev) => (prev + 1) % slides.length)}
-            className="absolute right-8 z-20 p-3 hover:bg-white/20 rounded-full transition"
+            className="absolute right-8 z-20 p-3 hover:bg-white/20 rounded-full transition-all duration-200 group"
           >
-            <ChevronRight className="w-8 h-8 text-white" />
+            <ChevronRight className="w-8 h-8 text-white group-hover:scale-110 transition-transform" />
           </button>
         </div>
 
         {/* Slide Indicators */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex gap-2">
+        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 flex gap-3">
           {slides.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setCurrentSlide(idx)}
-              className={`w-3 h-3 rounded-full transition ${
-                idx === currentSlide ? "bg-primary" : "bg-white/50"
-              }`}
+              className={`transition-all duration-300 ${
+                idx === currentSlide ? "bg-primary w-8 h-3" : "bg-white/50 w-3 h-3"
+              } rounded-full`}
             />
           ))}
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-16 bg-white">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-16 text-foreground">PEPTIDES | SARMS</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-20 tracking-tight text-foreground">
+            PEPTIDES | SARMS
+          </h2>
 
           <div className="grid md:grid-cols-3 gap-12">
             {/* Certified Lab Testing */}
-            <div className="text-center">
-              <div className="flex justify-center mb-6">
-                <Award className="w-16 h-16 text-foreground" />
+            <div className="text-center group">
+              <div className="flex justify-center mb-8">
+                <div className="p-6 bg-muted rounded-2xl group-hover:bg-primary/10 transition-colors duration-300">
+                  <Award className="w-12 h-12 text-foreground group-hover:text-primary transition-colors duration-300" />
+                </div>
               </div>
-              <h3 className="text-xl font-bold mb-4 text-foreground">CERTIFIED LAB TESTING</h3>
-              <p className="text-muted-foreground">
+              <h3 className="text-xl font-bold mb-4 text-foreground tracking-tight">CERTIFIED LAB TESTING</h3>
+              <p className="text-muted-foreground leading-relaxed">
                 We provide our customers with products that have been tested by reputable laboratories.
               </p>
             </div>
 
             {/* International Support */}
-            <div className="text-center">
-              <div className="flex justify-center mb-6">
-                <Headphones className="w-16 h-16 text-foreground" />
+            <div className="text-center group">
+              <div className="flex justify-center mb-8">
+                <div className="p-6 bg-muted rounded-2xl group-hover:bg-primary/10 transition-colors duration-300">
+                  <Headphones className="w-12 h-12 text-foreground group-hover:text-primary transition-colors duration-300" />
+                </div>
               </div>
-              <h3 className="text-xl font-bold mb-4 text-foreground">INTERNATIONAL SUPPORT</h3>
-              <p className="text-muted-foreground">
+              <h3 className="text-xl font-bold mb-4 text-foreground tracking-tight">INTERNATIONAL SUPPORT</h3>
+              <p className="text-muted-foreground leading-relaxed">
                 When you purchase any peptides through Helix Supps, you are guaranteed full support and advice before, during and after.
               </p>
             </div>
 
             {/* Premium Quality */}
-            <div className="text-center">
-              <div className="flex justify-center mb-6">
-                <Shield className="w-16 h-16 text-foreground" />
+            <div className="text-center group">
+              <div className="flex justify-center mb-8">
+                <div className="p-6 bg-muted rounded-2xl group-hover:bg-primary/10 transition-colors duration-300">
+                  <Shield className="w-12 h-12 text-foreground group-hover:text-primary transition-colors duration-300" />
+                </div>
               </div>
-              <h3 className="text-xl font-bold mb-4 text-foreground">PREMIUM QUALITY</h3>
-              <p className="text-muted-foreground">
+              <h3 className="text-xl font-bold mb-4 text-foreground tracking-tight">PREMIUM QUALITY</h3>
+              <p className="text-muted-foreground leading-relaxed">
                 We ensure that the ingredients we source are premium quality. Our products each have minimum of 99% purity.
               </p>
             </div>
@@ -289,32 +292,34 @@ export default function Home() {
       </section>
 
       {/* Products Section */}
-      <section className="py-16 bg-white">
+      <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-12 text-foreground">ELITE PEPTIDES</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 tracking-tight text-foreground">
+            ELITE PEPTIDES
+          </h2>
 
-          <div className="grid md:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-4 gap-8">
             {products.map((product) => (
               <Card
                 key={product.id}
-                className="border-2 border-dashed border-primary overflow-hidden hover:shadow-lg transition"
+                className="border-2 border-dashed border-primary overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white"
               >
                 <div className="relative h-56 bg-muted overflow-hidden">
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                   />
                   {product.sale && (
-                    <div className="absolute top-4 left-4 bg-secondary text-white px-3 py-1 text-sm font-bold">
+                    <div className="absolute top-4 left-4 bg-secondary text-white px-4 py-2 text-sm font-bold rounded-lg shadow-md">
                       Sale!
                     </div>
                   )}
                 </div>
 
-                <div className="p-4">
+                <div className="p-5">
                   {/* Rating */}
-                  <div className="flex items-center gap-2 mb-3">
+                  <div className="flex items-center gap-2 mb-4">
                     <div className="flex gap-1">
                       {[...Array(5)].map((_, i) => (
                         <Star
@@ -327,19 +332,19 @@ export default function Home() {
                         />
                       ))}
                     </div>
-                    <span className="bg-primary text-secondary text-xs px-2 py-1 rounded font-bold">
-                      {product.reviews} reviews
+                    <span className="bg-primary text-secondary text-xs px-3 py-1 rounded-full font-bold">
+                      {product.reviews}
                     </span>
                   </div>
 
                   {/* Product Name */}
-                  <h3 className="font-bold text-foreground mb-3 line-clamp-2">{product.name}</h3>
+                  <h3 className="font-bold text-foreground mb-3 line-clamp-2 text-sm">{product.name}</h3>
 
                   {/* Price */}
-                  <div className="flex items-center gap-2 mb-4">
+                  <div className="flex items-center gap-2 mb-5">
                     <span className="text-2xl font-bold text-foreground">{product.price}</span>
                     {product.originalPrice !== product.price && (
-                      <span className="text-sm text-muted-foreground line-through">
+                      <span className="text-xs text-muted-foreground line-through">
                         {product.originalPrice}
                       </span>
                     )}
@@ -347,7 +352,7 @@ export default function Home() {
 
                   {/* Add to Cart Button */}
                   <Button
-                    className="w-full bg-secondary text-white hover:bg-black font-bold"
+                    className="w-full bg-secondary text-white hover:bg-black font-bold rounded-lg transition-all duration-200 hover:shadow-lg"
                     onClick={() => handleAddToCart(product)}
                   >
                     ADD TO CART
@@ -360,21 +365,23 @@ export default function Home() {
       </section>
 
       {/* Peptide Dose Calculator */}
-      <section className="py-16 bg-muted/30">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-12 text-foreground">Peptide Dose Calculator</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 tracking-tight text-foreground">
+            Peptide Dose Calculator
+          </h2>
 
-          <div className="max-w-2xl mx-auto bg-white p-8 rounded-lg border border-border">
-            <div className="grid md:grid-cols-2 gap-8">
+          <div className="max-w-3xl mx-auto bg-white p-10 rounded-2xl border border-border shadow-lg">
+            <div className="grid md:grid-cols-2 gap-12">
               {/* Inputs */}
-              <div className="space-y-6">
+              <div className="space-y-8">
                 <div>
-                  <label className="block text-sm font-bold mb-3 text-foreground">Syringe size</label>
-                  <div className="flex gap-2">
+                  <label className="block text-sm font-bold mb-4 text-foreground tracking-tight">Syringe size</label>
+                  <div className="flex gap-3">
                     {["0.3 mL", "0.5 mL", "1 mL"].map((size) => (
                       <button
                         key={size}
-                        className="px-4 py-2 border border-border rounded hover:bg-muted transition text-sm font-semibold"
+                        className="px-5 py-2 border border-border rounded-lg hover:bg-primary hover:text-secondary hover:border-primary transition-all duration-200 text-sm font-semibold"
                       >
                         {size}
                       </button>
@@ -383,35 +390,35 @@ export default function Home() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-bold mb-2 text-foreground">Peptide per vial (mg)</label>
+                  <label className="block text-sm font-bold mb-3 text-foreground tracking-tight">Peptide per vial (mg)</label>
                   <input
                     type="number"
                     value={peptideMg}
                     onChange={(e) => setPeptideMg(Number(e.target.value))}
-                    className="w-full px-4 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary"
+                    className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-200"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-bold mb-2 text-foreground">Diluent volume (mL)</label>
+                  <label className="block text-sm font-bold mb-3 text-foreground tracking-tight">Diluent volume (mL)</label>
                   <input
                     type="number"
                     value={diluentMl}
                     onChange={(e) => setDiluentMl(Number(e.target.value))}
-                    className="w-full px-4 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary"
+                    className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-200"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-bold mb-3 text-foreground">Desired dose (mcg)</label>
-                  <div className="flex gap-2 flex-wrap">
+                  <label className="block text-sm font-bold mb-4 text-foreground tracking-tight">Desired dose (mcg)</label>
+                  <div className="flex gap-3 flex-wrap">
                     {[50, 100, 250, 500].map((dose) => (
                       <button
                         key={dose}
                         onClick={() => setSelectedDose(dose)}
-                        className={`px-4 py-2 border rounded font-semibold transition text-sm ${
+                        className={`px-4 py-2 border rounded-lg font-semibold transition-all duration-200 text-sm ${
                           selectedDose === dose
-                            ? "bg-primary text-secondary border-primary"
+                            ? "bg-primary text-secondary border-primary shadow-md"
                             : "border-border hover:bg-muted"
                         }`}
                       >
@@ -423,29 +430,29 @@ export default function Home() {
               </div>
 
               {/* Results */}
-              <div className="space-y-4 bg-muted/50 p-6 rounded">
-                <h3 className="font-bold text-lg text-foreground mb-6">Results</h3>
+              <div className="space-y-6 bg-muted/50 p-8 rounded-xl border border-border">
+                <h3 className="font-bold text-lg text-foreground mb-8 tracking-tight">Results</h3>
 
-                <div>
-                  <p className="text-sm text-muted-foreground mb-1">Concentration</p>
-                  <p className="text-2xl font-bold text-foreground">{concentration}</p>
-                  <p className="text-xs text-muted-foreground">mg per mL</p>
+                <div className="pb-6 border-b border-border">
+                  <p className="text-xs text-muted-foreground mb-2 font-semibold uppercase">Concentration</p>
+                  <p className="text-3xl font-bold text-foreground">{concentration}</p>
+                  <p className="text-xs text-muted-foreground mt-1">mg per mL</p>
                 </div>
 
-                <div>
-                  <p className="text-sm text-muted-foreground mb-1">Draw Volume</p>
-                  <p className="text-2xl font-bold text-foreground">{drawVolume}</p>
-                  <p className="text-xs text-muted-foreground">mL to pull</p>
+                <div className="pb-6 border-b border-border">
+                  <p className="text-xs text-muted-foreground mb-2 font-semibold uppercase">Draw Volume</p>
+                  <p className="text-3xl font-bold text-foreground">{drawVolume}</p>
+                  <p className="text-xs text-muted-foreground mt-1">mL to pull</p>
                 </div>
 
-                <div>
-                  <p className="text-sm text-muted-foreground mb-1">Syringe Units (U-100)</p>
-                  <p className="text-2xl font-bold text-foreground">{syringeUnits}</p>
-                  <p className="text-xs text-muted-foreground">1 mL = 100 units</p>
+                <div className="pb-6 border-b border-border">
+                  <p className="text-xs text-muted-foreground mb-2 font-semibold uppercase">Syringe Units (U-100)</p>
+                  <p className="text-3xl font-bold text-foreground">{syringeUnits}</p>
+                  <p className="text-xs text-muted-foreground mt-1">1 mL = 100 units</p>
                 </div>
 
-                <div className="pt-4 border-t border-border">
-                  <p className="text-xs text-muted-foreground">
+                <div className="pt-4">
+                  <p className="text-xs text-muted-foreground leading-relaxed">
                     Disclaimer: Educational tool only. Not medical advice. Always confirm calculations with a licensed clinician.
                   </p>
                 </div>
@@ -456,19 +463,21 @@ export default function Home() {
       </section>
 
       {/* Reviews Section */}
-      <section className="py-16 bg-white">
+      <section className="py-20 bg-muted/30">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-12 text-foreground">REVIEWS</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 tracking-tight text-foreground">
+            REVIEWS
+          </h2>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
             {reviews.map((review, idx) => (
-              <Card key={idx} className="p-6 border border-border">
-                <div className="flex gap-1 mb-3">
+              <Card key={idx} className="p-8 border border-border bg-white hover:shadow-lg transition-shadow duration-300">
+                <div className="flex gap-1 mb-4">
                   {[...Array(review.rating)].map((_, i) => (
                     <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
                   ))}
                 </div>
-                <p className="text-foreground mb-4">{review.text}</p>
+                <p className="text-foreground mb-6 leading-relaxed">{review.text}</p>
                 <div className="flex justify-between items-center text-sm">
                   <p className="font-bold text-foreground">{review.name}</p>
                   <p className="text-muted-foreground">{review.date}</p>
@@ -477,8 +486,8 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="text-center mt-12">
-            <Button variant="outline" className="border-2 border-foreground text-foreground hover:bg-foreground hover:text-white">
+          <div className="text-center">
+            <Button variant="outline" className="border-2 border-foreground text-foreground hover:bg-foreground hover:text-white rounded-lg transition-all duration-200">
               Show more reviews (2588)
             </Button>
           </div>
@@ -486,32 +495,32 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section className="py-16 bg-muted/30">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
-              <h2 className="text-4xl font-bold text-foreground">ABOUT HELIX</h2>
-              <p className="text-foreground/80">
+          <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div className="space-y-8">
+              <h2 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight">ABOUT HELIX</h2>
+              <p className="text-foreground/80 leading-relaxed text-lg">
                 Helix Supps has the backing of leading research users around the world due to our dedication to offering the highest purity ingredients in every product, with our commitment and care globally.
               </p>
-              <p className="text-foreground/80">
+              <p className="text-foreground/80 leading-relaxed text-lg">
                 We are here to help researchers attain their optimum potential in all endeavours. At Helix Supps, we sell high-quality, tried and laboratory tested research use-only products.
               </p>
-              <Button className="bg-secondary text-white hover:bg-black font-bold">
+              <Button className="bg-secondary text-white hover:bg-black font-bold rounded-lg px-8 py-6 transition-all duration-200 hover:shadow-lg">
                 READ MORE
               </Button>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-6">
               <img
-                src="https://via.placeholder.com/200x250?text=Product+1"
+                src="https://via.placeholder.com/250x300?text=Product+1"
                 alt="Product"
-                className="w-full h-64 object-cover rounded"
+                className="w-full h-72 object-cover rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
               />
               <img
-                src="https://via.placeholder.com/200x250?text=Product+2"
+                src="https://via.placeholder.com/250x300?text=Product+2"
                 alt="Product"
-                className="w-full h-64 object-cover rounded"
+                className="w-full h-72 object-cover rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
               />
             </div>
           </div>
@@ -519,42 +528,35 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-secondary text-white py-12">
+      <footer className="bg-secondary text-white py-16">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
+          <div className="grid md:grid-cols-3 gap-12 mb-12">
             <div>
-              <h4 className="font-bold mb-4">HELIX SUPPS</h4>
-              <ul className="space-y-2 text-sm">
-                <li><a href="#" className="hover:text-primary transition">Home</a></li>
-                <li><a href="#" className="hover:text-primary transition">Shop</a></li>
-                <li><a href="#" className="hover:text-primary transition">About Us</a></li>
+              <h4 className="font-bold mb-6 text-lg tracking-tight">HELIX SUPPS</h4>
+              <ul className="space-y-3 text-sm">
+                <li><a href="#" className="hover:text-primary transition-colors duration-200">Home</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors duration-200">Shop</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors duration-200">About Us</a></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-bold mb-4">SUPPORT</h4>
-              <ul className="space-y-2 text-sm">
-                <li><a href="#" className="hover:text-primary transition">Contact Us</a></li>
-                <li><a href="#" className="hover:text-primary transition">FAQs</a></li>
-                <li><a href="#" className="hover:text-primary transition">Shipping + Returns</a></li>
+              <h4 className="font-bold mb-6 text-lg tracking-tight">SUPPORT</h4>
+              <ul className="space-y-3 text-sm">
+                <li><a href="#" className="hover:text-primary transition-colors duration-200">Contact Us</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors duration-200">FAQs</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors duration-200">Shipping + Returns</a></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-bold mb-4">AFFILIATE</h4>
-              <ul className="space-y-2 text-sm">
-                <li><a href="#" className="hover:text-primary transition">Join Our Affiliate Program</a></li>
-                <li><a href="#" className="hover:text-primary transition">Affiliate Login</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold mb-4">LEGAL</h4>
-              <ul className="space-y-2 text-sm">
-                <li><a href="#" className="hover:text-primary transition">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-primary transition">Terms of Service</a></li>
+              <h4 className="font-bold mb-6 text-lg tracking-tight">LEGAL</h4>
+              <ul className="space-y-3 text-sm">
+                <li><a href="#" className="hover:text-primary transition-colors duration-200">Privacy Policy</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors duration-200">Terms of Service</a></li>
               </ul>
             </div>
           </div>
 
-          <div className="border-t border-white/20 pt-8 text-center text-sm">
+          <div className="border-t border-white/20 pt-8 text-center text-sm text-white/80">
             <p>&copy; 2026 Helix BioWorks. All rights reserved. For research use only.</p>
           </div>
         </div>
