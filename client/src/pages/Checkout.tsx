@@ -3,6 +3,7 @@ import { useCart } from "@/contexts/CartContext";
 import { ChevronLeft, CheckCircle } from "lucide-react";
 import { useLocation } from "wouter";
 import { useState } from "react";
+import { sendOrderConfirmationEmail } from "@/lib/emailService";
 
 export default function CheckoutPage() {
   const { items, getTotalPrice, clearCart } = useCart();
@@ -28,7 +29,7 @@ export default function CheckoutPage() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmitOrder = (e: React.FormEvent) => {
+  const handleSubmitOrder = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Validate form
@@ -37,14 +38,59 @@ export default function CheckoutPage() {
       return;
     }
 
-    // Simulate order processing
-    setOrderPlaced(true);
-    clearCart();
-    
-    // Redirect to confirmation after 3 seconds
-    setTimeout(() => {
-      setLocation("/");
-    }, 3000);
+    try {
+      // Generate order ID
+      const orderId = `ORD-${Date.now()}`;
+      const orderDate = new Date().toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+
+      const totalPrice = getTotalPrice();
+      const tax = totalPrice * 0.08;
+      const total = totalPrice + tax;
+
+      // Send order confirmation email
+      const emailResult = await sendOrderConfirmationEmail({
+        customerName: `${formData.firstName} ${formData.lastName}`,
+        customerEmail: formData.email,
+        orderId,
+        orderDate,
+        items: items.map(item => ({
+          name: item.name,
+          quantity: item.quantity,
+          price: item.price,
+        })),
+        subtotal: totalPrice,
+        tax,
+        shipping: 0,
+        total,
+        paymentMethod: "Credit Card",
+        shippingAddress: {
+          address: formData.address,
+          city: formData.city,
+          state: formData.state,
+          zip: formData.zip,
+        },
+      });
+
+      console.log("Email result:", emailResult);
+
+      // Mark order as placed
+      setOrderPlaced(true);
+      clearCart();
+      
+      // Redirect to confirmation after 3 seconds
+      setTimeout(() => {
+        setLocation("/");
+      }, 3000);
+    } catch (error) {
+      console.error("Order processing error:", error);
+      alert("Error processing order. Please try again.");
+    }
   };
 
   if (items.length === 0 && !orderPlaced) {
@@ -340,8 +386,9 @@ export default function CheckoutPage() {
                 size="lg"
                 className="w-full bg-accent hover:bg-accent/90 text-white font-semibold"
                 onClick={handleSubmitOrder}
+                type="submit"
               >
-                Complete Order
+                Complete Order & Send Email
               </Button>
 
               <Button
