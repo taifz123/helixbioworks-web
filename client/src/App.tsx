@@ -8,6 +8,9 @@ import { CartProvider } from "./contexts/CartContext";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
+import About from "./pages/About";
+import Support from "./pages/Support";
+import Contact from "./pages/Contact";
 
 
 function Router() {
@@ -16,6 +19,9 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/cart" component={Cart} />
       <Route path="/checkout" component={Checkout} />
+      <Route path="/about" component={About} />
+      <Route path="/support" component={Support} />
+      <Route path="/contact" component={Contact} />
       <Route path="/404" component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
