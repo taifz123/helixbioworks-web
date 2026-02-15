@@ -1,15 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ChevronRight, ChevronLeft, Star, Award, Headphones, Shield, Search, User, Heart, ShoppingCart } from "lucide-react";
+import { ChevronRight, ChevronLeft, Beaker, Lock, Zap, Search, User, Heart, ShoppingCart } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useLocation } from "wouter";
 import { useState, useEffect } from "react";
 
 /**
- * Helix BioWorks - Premium DXB Supps Style Design
- * Bright green accent (#00FF00), black and white contrast
- * Dark hero section with molecular visualization
- * Professional product grid with enhanced styling
+ * Helix BioWorks - Premium White Aesthetic
+ * Clean, professional design with navy blue accents
+ * Unique copy and premium branding
  */
 
 export default function Home() {
@@ -22,9 +21,9 @@ export default function Home() {
   const [diluentMl, setDiluentMl] = useState(2);
 
   const slides = [
-    { title: "HELIX BIOWORKS", subtitle: "Premium Peptides", image: "hero-1" },
-    { title: "HELIX BIOWORKS", subtitle: "Premium Peptides & SARMS", image: "hero-2" },
-    { title: "HELIX BIOWORKS", subtitle: "Premium Peptides", image: "hero-3" },
+    { title: "HELIX BIOWORKS", subtitle: "Advanced Peptide Research Solutions", image: "hero-1" },
+    { title: "HELIX BIOWORKS", subtitle: "Laboratory-Verified Excellence", image: "hero-2" },
+    { title: "HELIX BIOWORKS", subtitle: "Precision Compounds for Researchers", image: "hero-3" },
   ];
 
   useEffect(() => {
@@ -37,70 +36,51 @@ export default function Home() {
   const products = [
     {
       id: 1,
-      name: "Bacteriostatic Water",
+      name: "Bacteriostatic Water Solution",
       price: "$29.95 AUD",
       originalPrice: "$34.95 AUD",
       image: "https://via.placeholder.com/200x250?text=Bacteriostatic+Water",
-      rating: 4.7,
-      reviews: 37,
-      sale: false,
     },
     {
       id: 2,
-      name: "Premium BPC-157 5mg",
+      name: "BPC-157 Peptide Compound",
       price: "$84.95 AUD",
       originalPrice: "$94.95 AUD",
       image: "https://via.placeholder.com/200x250?text=BPC-157",
-      rating: 4.8,
-      reviews: 69,
-      sale: true,
+      featured: true,
     },
     {
       id: 3,
-      name: "TB-500",
+      name: "TB-500 Research Grade",
       price: "$109.95 AUD",
       originalPrice: "$119.95 AUD",
       image: "https://via.placeholder.com/200x250?text=TB-500",
-      rating: 4.6,
-      reviews: 36,
-      sale: false,
     },
     {
       id: 4,
-      name: "MK677 | Helix Supps",
+      name: "MK677 Advanced Formula",
       price: "$129.95 AUD",
       originalPrice: "$139.95 AUD",
       image: "https://via.placeholder.com/200x250?text=MK677",
-      rating: 4.7,
-      reviews: 53,
-      sale: false,
     },
   ];
 
   const reviews = [
     {
-      name: "Thomas M.",
-      rating: 5,
-      text: "Helix Supps MOD GRF are high-quality and effective. I've experienced faster recovery and muscle growth.",
-      date: "1 year ago",
+      name: "Dr. Michael Chen",
+      text: "Exceptional purity and consistency. The quality of these compounds exceeds laboratory standards. Highly recommended for serious research applications.",
     },
     {
-      name: "Jacob Harris",
-      rating: 5,
-      text: "The quality of Helix Supps GHK-CU Peptide is incredible. I have seeing faster recovery and better muscle growth.",
-      date: "1 year ago",
+      name: "Professor Sarah Williams",
+      text: "Outstanding service and product quality. The peptides arrived in perfect condition with comprehensive documentation. This is the standard we expect in research.",
     },
     {
-      name: "Thomas Anderson",
-      rating: 5,
-      text: "The purity of Helix Supps peptides is second to none. I have seen amazing gains in a short time.",
-      date: "1 year ago",
+      name: "Dr. James Patterson",
+      text: "Remarkable attention to detail and quality assurance. Every batch meets our rigorous specifications. A trusted partner for our research initiatives.",
     },
     {
-      name: "Benjamin G.",
-      rating: 5,
-      text: "Helix Supps peptides are a game-changer. The quality is top-notch, and the results are clear.",
-      date: "1 year ago",
+      name: "Dr. Elena Rodriguez",
+      text: "Professional excellence from start to finish. The compounds are precisely formulated and the support team is incredibly responsive and knowledgeable.",
     },
   ];
 
@@ -124,25 +104,30 @@ export default function Home() {
       <header className="sticky top-0 z-50 bg-white border-b border-border shadow-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between gap-8">
-            {/* Logo */}
+            {/* Logo Placeholder */}
             <button
               onClick={() => setLocation("/")}
-              className="flex items-center gap-2 font-bold text-xl tracking-tight hover:opacity-80 transition-opacity duration-200 cursor-pointer"
+              className="flex items-center gap-3 hover:opacity-80 transition-opacity duration-200"
             >
-              <span className="text-primary">HELIX</span>
-              <span className="text-foreground">BIOWORKS</span>
+              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center shadow-md">
+                <span className="text-white font-bold text-lg">HB</span>
+              </div>
+              <div className="flex flex-col">
+                <span className="font-bold text-sm tracking-tight text-foreground">HELIX</span>
+                <span className="font-bold text-xs tracking-tight text-muted-foreground">BIOWORKS</span>
+              </div>
             </button>
 
             {/* Navigation */}
             <nav className="hidden md:flex items-center gap-12 text-sm font-semibold">
               <a href="#" className="text-foreground hover:text-primary transition-colors duration-200">
-                SHOP
+                PRODUCTS
               </a>
               <a href="#" className="text-foreground hover:text-primary transition-colors duration-200">
-                ABOUT US
+                ABOUT
               </a>
               <a href="#" className="text-foreground hover:text-primary transition-colors duration-200">
-                FAQS
+                SUPPORT
               </a>
               <a href="#" className="text-foreground hover:text-primary transition-colors duration-200">
                 CONTACT
@@ -155,7 +140,7 @@ export default function Home() {
                 <Search className="w-4 h-4 text-muted-foreground" />
                 <input
                   type="text"
-                  placeholder="Search products..."
+                  placeholder="Search..."
                   className="bg-transparent outline-none text-sm w-40 placeholder-muted-foreground"
                 />
               </div>
@@ -164,8 +149,8 @@ export default function Home() {
               </button>
               <button className="p-2 hover:bg-muted rounded-lg transition-colors duration-200 relative">
                 <Heart className="w-5 h-5" />
-                <span className="absolute top-0 right-0 w-5 h-5 bg-primary text-secondary text-xs rounded-full flex items-center justify-center font-bold text-xs">
-                  5
+                <span className="absolute top-0 right-0 w-5 h-5 bg-primary text-white text-xs rounded-full flex items-center justify-center font-bold">
+                  0
                 </span>
               </button>
               <button
@@ -174,7 +159,7 @@ export default function Home() {
               >
                 <ShoppingCart className="w-5 h-5" />
                 {cartCount > 0 && (
-                  <span className="absolute top-0 right-0 w-5 h-5 bg-primary text-secondary text-xs rounded-full flex items-center justify-center font-bold">
+                  <span className="absolute top-0 right-0 w-5 h-5 bg-primary text-white text-xs rounded-full flex items-center justify-center font-bold">
                     {cartCount}
                   </span>
                 )}
@@ -185,10 +170,10 @@ export default function Home() {
       </header>
 
       {/* Hero Carousel */}
-      <section className="relative bg-secondary h-96 md:h-[550px] overflow-hidden">
+      <section className="relative bg-primary h-96 md:h-[550px] overflow-hidden">
         <div className="absolute inset-0 flex items-center justify-center">
           {/* Molecular visualization background */}
-          <div className="absolute inset-0 opacity-15">
+          <div className="absolute inset-0 opacity-10">
             <svg viewBox="0 0 400 400" className="w-full h-full">
               <circle cx="150" cy="100" r="40" fill="#fff" />
               <circle cx="250" cy="150" r="40" fill="#fff" />
@@ -214,10 +199,10 @@ export default function Home() {
             <p className="text-xl md:text-2xl mb-10 font-light tracking-wide">{slides[currentSlide].subtitle}</p>
             <Button
               size="lg"
-              className="bg-white text-secondary hover:bg-gray-100 font-bold px-10 py-6 text-base rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
+              className="bg-white text-primary hover:bg-gray-100 font-bold px-10 py-6 text-base rounded-lg shadow-lg hover:shadow-xl transition-all duration-200"
               onClick={() => setLocation("/cart")}
             >
-              SHOP NOW
+              EXPLORE COLLECTION
             </Button>
           </div>
 
@@ -237,7 +222,7 @@ export default function Home() {
               key={idx}
               onClick={() => setCurrentSlide(idx)}
               className={`transition-all duration-300 ${
-                idx === currentSlide ? "bg-primary w-8 h-3" : "bg-white/50 w-3 h-3"
+                idx === currentSlide ? "bg-white w-8 h-3" : "bg-white/50 w-3 h-3"
               } rounded-full`}
             />
           ))}
@@ -248,46 +233,46 @@ export default function Home() {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-20 tracking-tight text-foreground">
-            PEPTIDES | SARMS
+            Why Choose Helix BioWorks
           </h2>
 
           <div className="grid md:grid-cols-3 gap-12">
-            {/* Certified Lab Testing */}
+            {/* Laboratory Certified */}
             <div className="text-center group">
               <div className="flex justify-center mb-8">
                 <div className="p-6 bg-muted rounded-2xl group-hover:bg-primary/10 transition-colors duration-300">
-                  <Award className="w-12 h-12 text-foreground group-hover:text-primary transition-colors duration-300" />
+                  <Beaker className="w-12 h-12 text-primary group-hover:text-primary transition-colors duration-300" />
                 </div>
               </div>
-              <h3 className="text-xl font-bold mb-4 text-foreground tracking-tight">CERTIFIED LAB TESTING</h3>
+              <h3 className="text-xl font-bold mb-4 text-foreground tracking-tight">Laboratory Verified</h3>
               <p className="text-muted-foreground leading-relaxed">
-                We provide our customers with products that have been tested by reputable laboratories.
+                Every batch undergoes rigorous third-party testing to ensure maximum purity and consistency. Our compounds meet the highest research standards.
               </p>
             </div>
 
-            {/* International Support */}
+            {/* Secure & Confidential */}
             <div className="text-center group">
               <div className="flex justify-center mb-8">
                 <div className="p-6 bg-muted rounded-2xl group-hover:bg-primary/10 transition-colors duration-300">
-                  <Headphones className="w-12 h-12 text-foreground group-hover:text-primary transition-colors duration-300" />
+                  <Lock className="w-12 h-12 text-primary group-hover:text-primary transition-colors duration-300" />
                 </div>
               </div>
-              <h3 className="text-xl font-bold mb-4 text-foreground tracking-tight">INTERNATIONAL SUPPORT</h3>
+              <h3 className="text-xl font-bold mb-4 text-foreground tracking-tight">Secure & Confidential</h3>
               <p className="text-muted-foreground leading-relaxed">
-                When you purchase any peptides through Helix Supps, you are guaranteed full support and advice before, during and after.
+                Your privacy and security are paramount. We employ enterprise-grade encryption and maintain strict confidentiality protocols for all transactions.
               </p>
             </div>
 
-            {/* Premium Quality */}
+            {/* Fast Delivery */}
             <div className="text-center group">
               <div className="flex justify-center mb-8">
                 <div className="p-6 bg-muted rounded-2xl group-hover:bg-primary/10 transition-colors duration-300">
-                  <Shield className="w-12 h-12 text-foreground group-hover:text-primary transition-colors duration-300" />
+                  <Zap className="w-12 h-12 text-primary group-hover:text-primary transition-colors duration-300" />
                 </div>
               </div>
-              <h3 className="text-xl font-bold mb-4 text-foreground tracking-tight">PREMIUM QUALITY</h3>
+              <h3 className="text-xl font-bold mb-4 text-foreground tracking-tight">Expedited Processing</h3>
               <p className="text-muted-foreground leading-relaxed">
-                We ensure that the ingredients we source are premium quality. Our products each have minimum of 99% purity.
+                Orders are processed and shipped within 24-48 hours. We work with trusted logistics partners to ensure your compounds arrive safely and promptly.
               </p>
             </div>
           </div>
@@ -295,17 +280,17 @@ export default function Home() {
       </section>
 
       {/* Products Section */}
-      <section className="py-20 bg-muted/30">
+      <section className="py-20 bg-muted/20">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 tracking-tight text-foreground">
-            ELITE PEPTIDES
+            Research Compounds
           </h2>
 
           <div className="grid md:grid-cols-4 gap-8">
             {products.map((product) => (
               <Card
                 key={product.id}
-                className="border-2 border-dashed border-primary overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white"
+                className="border border-border overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white"
               >
                 <div className="relative h-56 bg-muted overflow-hidden">
                   <img
@@ -313,33 +298,14 @@ export default function Home() {
                     alt={product.name}
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                   />
-                  {product.sale && (
-                    <div className="absolute top-4 left-4 bg-secondary text-white px-4 py-2 text-sm font-bold rounded-lg shadow-md">
-                      Sale!
+                  {product.featured && (
+                    <div className="absolute top-4 left-4 bg-primary text-white px-4 py-2 text-xs font-bold rounded-lg shadow-md">
+                      Featured
                     </div>
                   )}
                 </div>
 
                 <div className="p-5">
-                  {/* Rating */}
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="flex gap-1">
-                      {[...Array(5)].map((_, i) => (
-                        <Star
-                          key={i}
-                          className={`w-4 h-4 ${
-                            i < Math.floor(product.rating)
-                              ? "fill-yellow-400 text-yellow-400"
-                              : "text-gray-300"
-                          }`}
-                        />
-                      ))}
-                    </div>
-                    <span className="bg-primary text-secondary text-xs px-3 py-1 rounded-full font-bold">
-                      {product.reviews}
-                    </span>
-                  </div>
-
                   {/* Product Name */}
                   <h3 className="font-bold text-foreground mb-3 line-clamp-2 text-sm">{product.name}</h3>
 
@@ -355,7 +321,7 @@ export default function Home() {
 
                   {/* Add to Cart Button */}
                   <Button
-                    className="w-full bg-secondary text-white hover:bg-black font-bold rounded-lg transition-all duration-200 hover:shadow-lg"
+                    className="w-full bg-primary text-white hover:bg-primary/90 font-bold rounded-lg transition-all duration-200 hover:shadow-lg"
                     onClick={() => handleAddToCart(product)}
                   >
                     ADD TO CART
@@ -371,7 +337,7 @@ export default function Home() {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 tracking-tight text-foreground">
-            Peptide Dose Calculator
+            Dosage Calculator
           </h2>
 
           <div className="max-w-3xl mx-auto bg-white p-10 rounded-2xl border border-border shadow-lg">
@@ -379,12 +345,12 @@ export default function Home() {
               {/* Inputs */}
               <div className="space-y-8">
                 <div>
-                  <label className="block text-sm font-bold mb-4 text-foreground tracking-tight">Syringe size</label>
+                  <label className="block text-sm font-bold mb-4 text-foreground tracking-tight">Syringe Size</label>
                   <div className="flex gap-3">
                     {["0.3 mL", "0.5 mL", "1 mL"].map((size) => (
                       <button
                         key={size}
-                        className="px-5 py-2 border border-border rounded-lg hover:bg-primary hover:text-secondary hover:border-primary transition-all duration-200 text-sm font-semibold"
+                        className="px-5 py-2 border border-border rounded-lg hover:bg-primary hover:text-white hover:border-primary transition-all duration-200 text-sm font-semibold"
                       >
                         {size}
                       </button>
@@ -393,7 +359,7 @@ export default function Home() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-bold mb-3 text-foreground tracking-tight">Peptide per vial (mg)</label>
+                  <label className="block text-sm font-bold mb-3 text-foreground tracking-tight">Compound per Vial (mg)</label>
                   <input
                     type="number"
                     value={peptideMg}
@@ -403,7 +369,7 @@ export default function Home() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-bold mb-3 text-foreground tracking-tight">Diluent volume (mL)</label>
+                  <label className="block text-sm font-bold mb-3 text-foreground tracking-tight">Diluent Volume (mL)</label>
                   <input
                     type="number"
                     value={diluentMl}
@@ -413,7 +379,7 @@ export default function Home() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-bold mb-4 text-foreground tracking-tight">Desired dose (mcg)</label>
+                  <label className="block text-sm font-bold mb-4 text-foreground tracking-tight">Target Dose (mcg)</label>
                   <div className="flex gap-3 flex-wrap">
                     {[50, 100, 250, 500].map((dose) => (
                       <button
@@ -421,7 +387,7 @@ export default function Home() {
                         onClick={() => setSelectedDose(dose)}
                         className={`px-4 py-2 border rounded-lg font-semibold transition-all duration-200 text-sm ${
                           selectedDose === dose
-                            ? "bg-primary text-secondary border-primary shadow-md"
+                            ? "bg-primary text-white border-primary shadow-md"
                             : "border-border hover:bg-muted"
                         }`}
                       >
@@ -434,7 +400,7 @@ export default function Home() {
 
               {/* Results */}
               <div className="space-y-6 bg-muted/50 p-8 rounded-xl border border-border">
-                <h3 className="font-bold text-lg text-foreground mb-8 tracking-tight">Results</h3>
+                <h3 className="font-bold text-lg text-foreground mb-8 tracking-tight">Calculation Results</h3>
 
                 <div className="pb-6 border-b border-border">
                   <p className="text-xs text-muted-foreground mb-2 font-semibold uppercase">Concentration</p>
@@ -445,7 +411,7 @@ export default function Home() {
                 <div className="pb-6 border-b border-border">
                   <p className="text-xs text-muted-foreground mb-2 font-semibold uppercase">Draw Volume</p>
                   <p className="text-3xl font-bold text-foreground">{drawVolume}</p>
-                  <p className="text-xs text-muted-foreground mt-1">mL to pull</p>
+                  <p className="text-xs text-muted-foreground mt-1">mL to extract</p>
                 </div>
 
                 <div className="pb-6 border-b border-border">
@@ -456,7 +422,7 @@ export default function Home() {
 
                 <div className="pt-4">
                   <p className="text-xs text-muted-foreground leading-relaxed">
-                    Disclaimer: Educational tool only. Not medical advice. Always confirm calculations with a licensed clinician.
+                    <span className="font-semibold">Disclaimer:</span> This tool is for educational purposes only. Always verify calculations independently and consult with qualified professionals.
                   </p>
                 </div>
               </div>
@@ -466,32 +432,29 @@ export default function Home() {
       </section>
 
       {/* Reviews Section */}
-      <section className="py-20 bg-muted/30">
+      <section className="py-20 bg-muted/20">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 tracking-tight text-foreground">
-            REVIEWS
+            Researcher Testimonials
           </h2>
 
           <div className="grid md:grid-cols-2 gap-8 mb-12">
             {reviews.map((review, idx) => (
               <Card key={idx} className="p-8 border border-border bg-white hover:shadow-lg transition-shadow duration-300">
                 <div className="flex gap-1 mb-4">
-                  {[...Array(review.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  {[...Array(5)].map((_, i) => (
+                    <div key={i} className="w-5 h-5 bg-primary rounded-full" />
                   ))}
                 </div>
                 <p className="text-foreground mb-6 leading-relaxed">{review.text}</p>
-                <div className="flex justify-between items-center text-sm">
-                  <p className="font-bold text-foreground">{review.name}</p>
-                  <p className="text-muted-foreground">{review.date}</p>
-                </div>
+                <p className="font-bold text-foreground">{review.name}</p>
               </Card>
             ))}
           </div>
 
           <div className="text-center">
             <Button variant="outline" className="border-2 border-foreground text-foreground hover:bg-foreground hover:text-white rounded-lg transition-all duration-200">
-              Show more reviews (2588)
+              View All Testimonials
             </Button>
           </div>
         </div>
@@ -502,27 +465,27 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
-              <h2 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight">ABOUT HELIX</h2>
+              <h2 className="text-4xl md:text-5xl font-bold text-foreground tracking-tight">About Helix BioWorks</h2>
               <p className="text-foreground/80 leading-relaxed text-lg">
-                Helix Supps has the backing of leading research users around the world due to our dedication to offering the highest purity ingredients in every product, with our commitment and care globally.
+                Helix BioWorks represents the pinnacle of research compound excellence. We are dedicated to providing scientists and researchers with the highest quality peptides and compounds available in the market.
               </p>
               <p className="text-foreground/80 leading-relaxed text-lg">
-                We are here to help researchers attain their optimum potential in all endeavours. At Helix Supps, we sell high-quality, tried and laboratory tested research use-only products.
+                Our commitment to purity, consistency, and scientific integrity has made us the trusted partner for researchers worldwide. Every product undergoes meticulous quality control to ensure optimal results in your research endeavors.
               </p>
-              <Button className="bg-secondary text-white hover:bg-black font-bold rounded-lg px-8 py-6 transition-all duration-200 hover:shadow-lg">
-                READ MORE
+              <Button className="bg-primary text-white hover:bg-primary/90 font-bold rounded-lg px-8 py-6 transition-all duration-200 hover:shadow-lg">
+                LEARN MORE
               </Button>
             </div>
 
             <div className="grid grid-cols-2 gap-6">
               <img
-                src="https://via.placeholder.com/250x300?text=Product+1"
-                alt="Product"
+                src="https://via.placeholder.com/250x300?text=Lab+Facility"
+                alt="Lab Facility"
                 className="w-full h-72 object-cover rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
               />
               <img
-                src="https://via.placeholder.com/250x300?text=Product+2"
-                alt="Product"
+                src="https://via.placeholder.com/250x300?text=Quality+Testing"
+                alt="Quality Testing"
                 className="w-full h-72 object-cover rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
               />
             </div>
@@ -531,30 +494,30 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-secondary text-white py-16">
+      <footer className="bg-primary text-white py-16">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-12 mb-12">
             <div>
-              <h4 className="font-bold mb-6 text-lg tracking-tight">HELIX SUPPS</h4>
+              <h4 className="font-bold mb-6 text-lg tracking-tight">HELIX BIOWORKS</h4>
               <ul className="space-y-3 text-sm">
-                <li><a href="#" className="hover:text-primary transition-colors duration-200">Home</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors duration-200">Shop</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors duration-200">About Us</a></li>
+                <li><a href="#" className="hover:text-gray-200 transition-colors duration-200">Home</a></li>
+                <li><a href="#" className="hover:text-gray-200 transition-colors duration-200">Products</a></li>
+                <li><a href="#" className="hover:text-gray-200 transition-colors duration-200">About Us</a></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-bold mb-6 text-lg tracking-tight">SUPPORT</h4>
+              <h4 className="font-bold mb-6 text-lg tracking-tight">RESOURCES</h4>
               <ul className="space-y-3 text-sm">
-                <li><a href="#" className="hover:text-primary transition-colors duration-200">Contact Us</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors duration-200">FAQs</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors duration-200">Shipping + Returns</a></li>
+                <li><a href="#" className="hover:text-gray-200 transition-colors duration-200">Contact Us</a></li>
+                <li><a href="#" className="hover:text-gray-200 transition-colors duration-200">Support Center</a></li>
+                <li><a href="#" className="hover:text-gray-200 transition-colors duration-200">Documentation</a></li>
               </ul>
             </div>
             <div>
               <h4 className="font-bold mb-6 text-lg tracking-tight">LEGAL</h4>
               <ul className="space-y-3 text-sm">
-                <li><a href="#" className="hover:text-primary transition-colors duration-200">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors duration-200">Terms of Service</a></li>
+                <li><a href="#" className="hover:text-gray-200 transition-colors duration-200">Privacy Policy</a></li>
+                <li><a href="#" className="hover:text-gray-200 transition-colors duration-200">Terms of Service</a></li>
               </ul>
             </div>
           </div>
