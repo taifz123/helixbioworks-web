@@ -125,10 +125,13 @@ export default function Home() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between gap-8">
             {/* Logo */}
-            <div className="flex items-center gap-2 font-bold text-xl tracking-tight">
+            <button
+              onClick={() => setLocation("/")}
+              className="flex items-center gap-2 font-bold text-xl tracking-tight hover:opacity-80 transition-opacity duration-200 cursor-pointer"
+            >
               <span className="text-primary">HELIX</span>
               <span className="text-foreground">BIOWORKS</span>
-            </div>
+            </button>
 
             {/* Navigation */}
             <nav className="hidden md:flex items-center gap-12 text-sm font-semibold">
