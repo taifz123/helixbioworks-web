@@ -357,9 +357,8 @@ export async function sendOrderConfirmationEmail(
   data: OrderEmailData
 ): Promise<{ success: boolean; message: string }> {
   try {
-    // OPTION 1: Using a backend API endpoint
-    // This is the recommended approach for production
-    const response = await fetch("/api/send-email", {
+    // Using Netlify Functions for serverless email delivery
+    const response = await fetch("/.netlify/functions/send-email", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

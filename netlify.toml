@@ -1,0 +1,60 @@
+# Netlify Configuration for Helix BioWorks
+# This file configures the build process, functions, and routing for Netlify deployment
+
+[build]
+# Build command to install dependencies and build the frontend
+command = "pnpm install --frozen-lockfile && pnpm build"
+
+# Publish directory - the folder containing the built frontend files
+# The Vite build outputs to dist/public, so we point to that
+publish = "dist/public"
+
+# Functions directory - where Netlify Functions are located
+functions = "netlify/functions"
+
+# Environment variables for Node.js runtime
+[build.environment]
+NODE_VERSION = "22.13.0"
+
+# SPA Fallback - Route all non-matching paths to index.html for client-side routing
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
+
+# API Redirects - Map /api/* paths to Netlify Functions
+[[redirects]]
+from = "/api/send-email"
+to = "/.netlify/functions/send-email"
+status = 200
+
+[[redirects]]
+from = "/api/health"
+to = "/.netlify/functions/health"
+status = 200
+
+# Security headers
+[[headers]]
+for = "/*"
+[headers.values]
+X-Content-Type-Options = "nosniff"
+X-Frame-Options = "SAMEORIGIN"
+X-XSS-Protection = "1; mode=block"
+Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Cache policy for static assets
+[[headers]]
+for = "/assets/*"
+[headers.values]
+Cache-Control = "public, max-age=31536000, immutable"
+
+# Cache policy for HTML files
+[[headers]]
+for = "/*.html"
+[headers.values]
+Cache-Control = "public, max-age=3600, must-revalidate"
+
+# Functions configuration
+[functions]
+# Node.js runtime version for functions
+node_bundler = "esbuild"
