@@ -28,18 +28,18 @@ export default function About() {
             </button>
 
             <nav className="hidden md:flex items-center gap-12 text-sm font-semibold">
-              <a href="#" onClick={() => setLocation("/")} className="text-foreground hover:text-primary transition-colors duration-200">
+              <button onClick={() => setLocation("/products")} className="text-foreground hover:text-primary transition-colors duration-200">
                 PRODUCTS
-              </a>
-              <a href="#" onClick={() => setLocation("/about")} className="text-primary transition-colors duration-200">
+              </button>
+              <button onClick={() => setLocation("/about")} className="text-primary transition-colors duration-200">
                 ABOUT
-              </a>
-              <a href="#" onClick={() => setLocation("/support")} className="text-foreground hover:text-primary transition-colors duration-200">
+              </button>
+              <button onClick={() => setLocation("/support")} className="text-foreground hover:text-primary transition-colors duration-200">
                 SUPPORT
-              </a>
-              <a href="#" onClick={() => setLocation("/contact")} className="text-foreground hover:text-primary transition-colors duration-200">
+              </button>
+              <button onClick={() => setLocation("/contact")} className="text-foreground hover:text-primary transition-colors duration-200">
                 CONTACT
-              </a>
+              </button>
             </nav>
 
             <div className="flex items-center gap-4">
@@ -159,16 +159,16 @@ export default function About() {
             <div>
               <h4 className="font-bold mb-6 text-lg tracking-tight">HELIX BIOWORKS</h4>
               <ul className="space-y-3 text-sm">
-                <li><a href="#" onClick={() => setLocation("/")} className="hover:text-gray-200 transition-colors duration-200">Home</a></li>
-                <li><a href="#" onClick={() => setLocation("/")} className="hover:text-gray-200 transition-colors duration-200">Products</a></li>
-                <li><a href="#" onClick={() => setLocation("/about")} className="hover:text-gray-200 transition-colors duration-200">About Us</a></li>
+                <li><button onClick={() => setLocation("/")} className="hover:text-gray-200 transition-colors duration-200">Home</button></li>
+                <li><button onClick={() => setLocation("/products")} className="hover:text-gray-200 transition-colors duration-200">Products</button></li>
+                <li><button onClick={() => setLocation("/about")} className="hover:text-gray-200 transition-colors duration-200">About Us</button></li>
               </ul>
             </div>
             <div>
               <h4 className="font-bold mb-6 text-lg tracking-tight">RESOURCES</h4>
               <ul className="space-y-3 text-sm">
-                <li><a href="#" onClick={() => setLocation("/contact")} className="hover:text-gray-200 transition-colors duration-200">Contact Us</a></li>
-                <li><a href="#" onClick={() => setLocation("/support")} className="hover:text-gray-200 transition-colors duration-200">Support Center</a></li>
+                <li><button onClick={() => setLocation("/contact")} className="hover:text-gray-200 transition-colors duration-200">Contact Us</button></li>
+                <li><button onClick={() => setLocation("/support")} className="hover:text-gray-200 transition-colors duration-200">Support Center</button></li>
               </ul>
             </div>
             <div>
