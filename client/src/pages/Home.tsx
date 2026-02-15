@@ -109,9 +109,6 @@ export default function Home() {
                 <Search className="w-4 h-4 text-muted-foreground" />
                 <input type="text" placeholder="Search..." className="bg-transparent outline-none text-sm w-40 placeholder-muted-foreground" />
               </div>
-              <button className="p-2 hover:bg-muted rounded-lg transition-colors duration-200">
-                <User className="w-5 h-5" />
-              </button>
               <button className="p-2 hover:bg-muted rounded-lg transition-colors duration-200 relative">
                 <Heart className="w-5 h-5" />
               </button>
@@ -354,18 +351,18 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-12 mb-16">
             <div>
-              <h4 className="font-bold mb-8 text-lg tracking-tight">HELIX BIOWORKS</h4>
+              <h4 className="font-bold mb-8 text-lg tracking-tight">NAVIGATION</h4>
               <ul className="space-y-4 text-sm">
                 <li><button onClick={() => setLocation("/")} className="hover:text-gray-200 transition-colors duration-200">Home</button></li>
                 <li><button onClick={() => setLocation("/products")} className="hover:text-gray-200 transition-colors duration-200">Products</button></li>
-                <li><button onClick={() => setLocation("/about")} className="hover:text-gray-200 transition-colors duration-200">About Us</button></li>
+                <li><button onClick={() => setLocation("/about")} className="hover:text-gray-200 transition-colors duration-200">About</button></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-bold mb-8 text-lg tracking-tight">RESOURCES</h4>
+              <h4 className="font-bold mb-8 text-lg tracking-tight">SUPPORT</h4>
               <ul className="space-y-4 text-sm">
-                <li><button onClick={() => setLocation("/contact")} className="hover:text-gray-200 transition-colors duration-200">Contact Us</button></li>
-                <li><button onClick={() => setLocation("/support")} className="hover:text-gray-200 transition-colors duration-200">Support Center</button></li>
+                <li><button onClick={() => setLocation("/contact")} className="hover:text-gray-200 transition-colors duration-200">Contact</button></li>
+                <li><button onClick={() => setLocation("/support")} className="hover:text-gray-200 transition-colors duration-200">Help Center</button></li>
               </ul>
             </div>
             <div>

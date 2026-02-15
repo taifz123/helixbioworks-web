@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useLocation } from "wouter";
-import { ShoppingCart, User, Heart, Search, Mail, Phone, MapPin } from "lucide-react";
+import { ShoppingCart, Heart, Search, Mail, Phone, MapPin, Send } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useState } from "react";
 
@@ -33,7 +33,7 @@ export default function Contact() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white border-b border-border shadow-sm">
+      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-border/50 shadow-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between gap-8">
             <button
@@ -69,9 +69,6 @@ export default function Contact() {
                 <Search className="w-4 h-4 text-muted-foreground" />
                 <input type="text" placeholder="Search..." className="bg-transparent outline-none text-sm w-40 placeholder-muted-foreground" />
               </div>
-              <button className="p-2 hover:bg-muted rounded-lg transition-colors duration-200">
-                <User className="w-5 h-5" />
-              </button>
               <button className="p-2 hover:bg-muted rounded-lg transition-colors duration-200 relative">
                 <Heart className="w-5 h-5" />
               </button>
@@ -85,11 +82,11 @@ export default function Contact() {
       </header>
 
       {/* Hero Section */}
-      <section className="bg-primary text-white py-20">
+      <section className="bg-gradient-to-br from-primary via-primary/95 to-primary/90 text-white py-32">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">Contact Us</h1>
-          <p className="text-xl md:text-2xl font-light max-w-3xl mx-auto">
-            Get in touch with our team for inquiries and support
+          <h1 className="text-6xl md:text-7xl font-bold mb-6 tracking-tight leading-tight">Get In Touch</h1>
+          <p className="text-xl md:text-2xl font-light max-w-3xl mx-auto leading-relaxed">
+            Our team is ready to assist you with any questions or support needs
           </p>
         </div>
       </section>
@@ -97,105 +94,107 @@ export default function Contact() {
       {/* Contact Section */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-12 mb-20">
-            {/* Contact Info Cards */}
-            <div className="bg-muted/20 p-8 rounded-xl border border-border text-center">
-              <div className="flex justify-center mb-6">
-                <div className="p-4 bg-primary rounded-lg">
-                  <Mail className="w-8 h-8 text-white" />
+          <div className="grid md:grid-cols-2 gap-16 items-start">
+            {/* Contact Info */}
+            <div className="space-y-12">
+              <h2 className="text-5xl font-bold text-foreground tracking-tight">Contact Information</h2>
+              
+              <div className="space-y-8">
+                <div className="flex gap-6 p-6 rounded-2xl border-2 border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300 group">
+                  <div className="p-4 bg-primary/10 rounded-xl group-hover:bg-primary/20 transition-colors duration-300">
+                    <Mail className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-foreground mb-2">Email</h3>
+                    <p className="text-foreground/70">support@helixbioworks.com</p>
+                  </div>
+                </div>
+                
+                <div className="flex gap-6 p-6 rounded-2xl border-2 border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300 group">
+                  <div className="p-4 bg-primary/10 rounded-xl group-hover:bg-primary/20 transition-colors duration-300">
+                    <Phone className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-foreground mb-2">Phone</h3>
+                    <p className="text-foreground/70">+1 (555) 123-4567</p>
+                  </div>
+                </div>
+                
+                <div className="flex gap-6 p-6 rounded-2xl border-2 border-border hover:border-primary/50 hover:shadow-lg transition-all duration-300 group">
+                  <div className="p-4 bg-primary/10 rounded-xl group-hover:bg-primary/20 transition-colors duration-300">
+                    <MapPin className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-foreground mb-2">Address</h3>
+                    <p className="text-foreground/70">123 Research Boulevard<br />Science City, SC 12345</p>
+                  </div>
                 </div>
               </div>
-              <h3 className="text-xl font-bold mb-3 text-foreground">Email</h3>
-              <p className="text-foreground/80">support@helixbioworks.com</p>
-              <p className="text-sm text-muted-foreground mt-2">Response time: 24 hours</p>
             </div>
-
-            <div className="bg-muted/20 p-8 rounded-xl border border-border text-center">
-              <div className="flex justify-center mb-6">
-                <div className="p-4 bg-primary rounded-lg">
-                  <Phone className="w-8 h-8 text-white" />
-                </div>
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-foreground">Phone</h3>
-              <p className="text-foreground/80">+1 (555) 123-4567</p>
-              <p className="text-sm text-muted-foreground mt-2">Mon-Fri: 9AM - 6PM UTC</p>
-            </div>
-
-            <div className="bg-muted/20 p-8 rounded-xl border border-border text-center">
-              <div className="flex justify-center mb-6">
-                <div className="p-4 bg-primary rounded-lg">
-                  <MapPin className="w-8 h-8 text-white" />
-                </div>
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-foreground">Location</h3>
-              <p className="text-foreground/80">Global Operations</p>
-              <p className="text-sm text-muted-foreground mt-2">Serving researchers worldwide</p>
-            </div>
-          </div>
-
-          {/* Contact Form */}
-          <div className="max-w-2xl mx-auto">
-            <h2 className="text-4xl font-bold text-center mb-12 tracking-tight">Send us a Message</h2>
             
-            {submitted ? (
-              <div className="bg-green-50 border border-green-200 rounded-lg p-8 text-center">
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-3xl">✓</span>
-                </div>
-                <h3 className="text-2xl font-bold text-green-900 mb-2">Message Sent!</h3>
-                <p className="text-green-800">Thank you for contacting us. We'll get back to you shortly.</p>
+            {/* Contact Form */}
+            <form onSubmit={handleSubmit} className="space-y-6 bg-gradient-to-br from-muted/20 to-white p-10 rounded-2xl border-2 border-border">
+              <h2 className="text-3xl font-bold text-foreground tracking-tight">Send us a Message</h2>
+              
+              <div>
+                <label className="block text-sm font-semibold text-foreground mb-3">Full Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-3 border-2 border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300"
+                  placeholder="Your name"
+                />
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Your Name *"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    className="px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-200"
-                    required
-                  />
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Your Email *"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    className="px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-200"
-                    required
-                  />
-                </div>
-
+              
+              <div>
+                <label className="block text-sm font-semibold text-foreground mb-3">Email Address</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-3 border-2 border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300"
+                  placeholder="your@email.com"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-semibold text-foreground mb-3">Subject</label>
                 <input
                   type="text"
                   name="subject"
-                  placeholder="Subject *"
                   value={formData.subject}
                   onChange={handleInputChange}
-                  className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-200"
                   required
+                  className="w-full px-4 py-3 border-2 border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300"
+                  placeholder="How can we help?"
                 />
-
+              </div>
+              
+              <div>
+                <label className="block text-sm font-semibold text-foreground mb-3">Message</label>
                 <textarea
                   name="message"
-                  placeholder="Your Message *"
                   value={formData.message}
                   onChange={handleInputChange}
-                  rows={6}
-                  className="w-full px-4 py-3 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-200 resize-none"
                   required
+                  rows={5}
+                  className="w-full px-4 py-3 border-2 border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none transition-all duration-300"
+                  placeholder="Tell us more about your inquiry..."
                 />
-
-                <Button
-                  type="submit"
-                  className="w-full bg-primary text-white hover:bg-primary/90 font-bold py-4 text-lg rounded-lg transition-all duration-200"
-                >
-                  SEND MESSAGE
-                </Button>
-              </form>
-            )}
+              </div>
+              
+              <button
+                type="submit"
+                className="w-full bg-primary text-white hover:bg-primary/90 font-bold py-4 rounded-lg transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center justify-center gap-2"
+              >
+                {submitted ? "Message Sent!" : <><Send className="w-4 h-4" /> Send Message</> }
+              </button>
+            </form>
           </div>
         </div>
       </section>
@@ -205,18 +204,18 @@ export default function Contact() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-12 mb-12">
             <div>
-              <h4 className="font-bold mb-6 text-lg tracking-tight">HELIX BIOWORKS</h4>
+              <h4 className="font-bold mb-6 text-lg tracking-tight">NAVIGATION</h4>
               <ul className="space-y-3 text-sm">
                 <li><button onClick={() => setLocation("/")} className="hover:text-gray-200 transition-colors duration-200">Home</button></li>
                 <li><button onClick={() => setLocation("/products")} className="hover:text-gray-200 transition-colors duration-200">Products</button></li>
-                <li><button onClick={() => setLocation("/about")} className="hover:text-gray-200 transition-colors duration-200">About Us</button></li>
+                <li><button onClick={() => setLocation("/about")} className="hover:text-gray-200 transition-colors duration-200">About</button></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-bold mb-6 text-lg tracking-tight">RESOURCES</h4>
+              <h4 className="font-bold mb-6 text-lg tracking-tight">SUPPORT</h4>
               <ul className="space-y-3 text-sm">
-                <li><button onClick={() => setLocation("/contact")} className="hover:text-gray-200 transition-colors duration-200">Contact Us</button></li>
-                <li><button onClick={() => setLocation("/support")} className="hover:text-gray-200 transition-colors duration-200">Support Center</button></li>
+                <li><button onClick={() => setLocation("/contact")} className="hover:text-gray-200 transition-colors duration-200">Contact</button></li>
+                <li><button onClick={() => setLocation("/support")} className="hover:text-gray-200 transition-colors duration-200">Help Center</button></li>
               </ul>
             </div>
             <div>
@@ -228,7 +227,7 @@ export default function Contact() {
             </div>
           </div>
           <div className="border-t border-white/20 pt-8 text-center text-sm text-white/80">
-            <p>&copy; 2026 Helix BioWorks. All rights reserved.</p>
+            <p>&copy; 2026 Helix BioWorks. All rights reserved. For research use only.</p>
           </div>
         </div>
       </footer>

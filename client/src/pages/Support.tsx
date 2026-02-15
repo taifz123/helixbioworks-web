@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useLocation } from "wouter";
-import { ShoppingCart, User, Heart, Search, ChevronDown } from "lucide-react";
+import { ShoppingCart, Heart, Search, ChevronDown } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useState } from "react";
 
@@ -48,7 +48,7 @@ export default function Support() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white border-b border-border shadow-sm">
+      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-border/50 shadow-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between gap-8">
             <button
@@ -84,9 +84,6 @@ export default function Support() {
                 <Search className="w-4 h-4 text-muted-foreground" />
                 <input type="text" placeholder="Search..." className="bg-transparent outline-none text-sm w-40 placeholder-muted-foreground" />
               </div>
-              <button className="p-2 hover:bg-muted rounded-lg transition-colors duration-200">
-                <User className="w-5 h-5" />
-              </button>
               <button className="p-2 hover:bg-muted rounded-lg transition-colors duration-200 relative">
                 <Heart className="w-5 h-5" />
               </button>
@@ -100,53 +97,86 @@ export default function Support() {
       </header>
 
       {/* Hero Section */}
-      <section className="bg-primary text-white py-20">
+      <section className="bg-gradient-to-br from-primary via-primary/95 to-primary/90 text-white py-32">
         <div className="container mx-auto px-4 text-center">
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 tracking-tight">Support Center</h1>
-          <p className="text-xl md:text-2xl font-light max-w-3xl mx-auto">
-            Find answers to common questions and get the help you need
+          <h1 className="text-6xl md:text-7xl font-bold mb-6 tracking-tight leading-tight">Support Center</h1>
+          <p className="text-xl md:text-2xl font-light max-w-3xl mx-auto leading-relaxed">
+            Find answers to common questions and get the support you need
           </p>
         </div>
       </section>
 
-      {/* FAQ Section */}
+      {/* Quick Links Section */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-4xl font-bold text-center mb-16 tracking-tight">Frequently Asked Questions</h2>
-            
-            <div className="space-y-4">
-              {faqs.map((faq, idx) => (
-                <div key={idx} className="border border-border rounded-lg overflow-hidden hover:shadow-md transition-shadow duration-300">
-                  <button
-                    onClick={() => setExpandedFaq(expandedFaq === idx ? null : idx)}
-                    className="w-full px-6 py-4 flex items-center justify-between bg-white hover:bg-muted/50 transition-colors duration-200"
-                  >
-                    <h3 className="text-lg font-bold text-foreground text-left">{faq.question}</h3>
-                    <ChevronDown className={`w-6 h-6 text-primary transition-transform duration-300 flex-shrink-0 ${expandedFaq === idx ? 'rotate-180' : ''}`} />
-                  </button>
-                  {expandedFaq === idx && (
-                    <div className="px-6 py-4 bg-muted/20 border-t border-border">
-                      <p className="text-foreground/80 leading-relaxed">{faq.answer}</p>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              { title: "Order Tracking", description: "Track your shipment in real-time" },
+              { title: "Product Info", description: "Detailed specifications and usage guides" },
+              { title: "Contact Us", description: "Reach our support team directly" }
+            ].map((link, idx) => (
+              <button
+                key={idx}
+                onClick={() => idx === 2 && setLocation("/contact")}
+                className="p-8 rounded-2xl border-2 border-border hover:border-primary hover:shadow-lg transition-all duration-300 text-left group hover:bg-primary/5"
+              >
+                <h3 className="text-2xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">{link.title}</h3>
+                <p className="text-foreground/70">{link.description}</p>
+              </button>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Contact CTA Section */}
-      <section className="py-20 bg-muted/20">
+      {/* FAQ Section */}
+      <section className="py-20 bg-gradient-to-b from-muted/20 to-white">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-bold text-foreground tracking-tight mb-6">Frequently Asked Questions</h2>
+            <p className="text-lg text-foreground/70">
+              Find quick answers to your most common questions
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            {faqs.map((faq, idx) => (
+              <div
+                key={idx}
+                className="border-2 border-border rounded-xl overflow-hidden hover:border-primary/50 transition-all duration-300"
+              >
+                <button
+                  onClick={() => setExpandedFaq(expandedFaq === idx ? null : idx)}
+                  className="w-full p-6 flex items-center justify-between bg-white hover:bg-muted/30 transition-colors duration-300 text-left"
+                >
+                  <h3 className="text-lg font-bold text-foreground pr-4">{faq.question}</h3>
+                  <ChevronDown
+                    className={`w-6 h-6 text-primary flex-shrink-0 transition-transform duration-300 ${
+                      expandedFaq === idx ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+
+                {expandedFaq === idx && (
+                  <div className="px-6 py-6 bg-muted/20 border-t-2 border-border">
+                    <p className="text-foreground/80 leading-relaxed">{faq.answer}</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact CTA */}
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold mb-6 tracking-tight">Didn't find what you're looking for?</h2>
-          <p className="text-lg text-foreground/80 mb-10 max-w-2xl mx-auto">
-            Our support team is here to help. Contact us directly for personalized assistance.
+          <h2 className="text-4xl font-bold text-foreground mb-6 tracking-tight">Still need help?</h2>
+          <p className="text-lg text-foreground/70 mb-10 max-w-2xl mx-auto">
+            Our support team is ready to assist you with any questions or concerns
           </p>
           <Button
             onClick={() => setLocation("/contact")}
-            className="bg-primary text-white hover:bg-primary/90 font-bold px-10 py-6 text-lg rounded-lg transition-all duration-200"
+            className="bg-primary text-white hover:bg-primary/90 font-bold px-12 py-6 text-lg rounded-lg transition-all duration-300 hover:shadow-lg hover:scale-105"
           >
             CONTACT SUPPORT
           </Button>
@@ -158,18 +188,18 @@ export default function Support() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-12 mb-12">
             <div>
-              <h4 className="font-bold mb-6 text-lg tracking-tight">HELIX BIOWORKS</h4>
+              <h4 className="font-bold mb-6 text-lg tracking-tight">NAVIGATION</h4>
               <ul className="space-y-3 text-sm">
                 <li><button onClick={() => setLocation("/")} className="hover:text-gray-200 transition-colors duration-200">Home</button></li>
                 <li><button onClick={() => setLocation("/products")} className="hover:text-gray-200 transition-colors duration-200">Products</button></li>
-                <li><button onClick={() => setLocation("/about")} className="hover:text-gray-200 transition-colors duration-200">About Us</button></li>
+                <li><button onClick={() => setLocation("/about")} className="hover:text-gray-200 transition-colors duration-200">About</button></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-bold mb-6 text-lg tracking-tight">RESOURCES</h4>
+              <h4 className="font-bold mb-6 text-lg tracking-tight">SUPPORT</h4>
               <ul className="space-y-3 text-sm">
-                <li><button onClick={() => setLocation("/contact")} className="hover:text-gray-200 transition-colors duration-200">Contact Us</button></li>
-                <li><button onClick={() => setLocation("/support")} className="hover:text-gray-200 transition-colors duration-200">Support Center</button></li>
+                <li><button onClick={() => setLocation("/contact")} className="hover:text-gray-200 transition-colors duration-200">Contact</button></li>
+                <li><button onClick={() => setLocation("/support")} className="hover:text-gray-200 transition-colors duration-200">Help Center</button></li>
               </ul>
             </div>
             <div>
